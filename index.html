@@ -236,6 +236,31 @@
                 </p>
             </div>
         </section>
+        <article>
+            <!-- Article tag used since this could be used on any page -->
+            <h3><strong>Reach Me Directly</strong></h3>
+            <hr />
+            <!-- Form uses a post method and 4 different input requirements.  -->
+            <form method="post" enctype="multipart/form-data">
+                <label for="name">Name:
+                    <input type="text" name="name" id="form-input" required />
+                </label>
+                <br>
+                <!-- Each input is wrapped in a label -->
+                <label for="email">Email:
+                    <input type="email" name="email" id="form-input" required />
+                </label>
+                <br>
+                <label for="phone">Phone:
+                    <input type="text" name="phone" id="form-input" required />
+                </label>
+                <br>
+                <textarea placeholder="Additional Details" name="message" rows="10" cols="40"></textarea>
+                <br>
+                <!-- Button for submission, utlitizing type and formaction -->
+                <button type="submit" formaction="#">Submit</button>
+            </form>
+        </article>
     </main>
     <footer>
         <!-- Footer signing off my work. -->
