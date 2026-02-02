@@ -5,6 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>Brandon Holderman CV</title>
 </head>
 
@@ -17,7 +21,7 @@
             <!-- Image sourced from my personal github with size altered to better fit page -->
             <img src="https://avatars.githubusercontent.com/u/18756859?v=4" alt="image of resume owner" height="250"
                 width="250" />
-            <table>
+            <table class="contact-table">
                 <!-- Table used for a clean and easy way to seperate content -->
                 <tbody>
                     <tr>
@@ -91,7 +95,7 @@
 
         <section>
             <!-- Section to highlight my work experience. With each job seperated into their own section and using unordered lists for job functions -->
-            <h3><strong>Experience</strong></h3>
+            <h3><strong><span class="first-three">Exp</span>erience</strong></h3>
             <hr />
             <div>
                 <!-- Use of strong throughout to highlight most important information -->
@@ -202,14 +206,14 @@
         </section>
         <section>
             <!-- Section to highlight education -->
-            <h3><strong>Education</strong></h3>
+            <h3><strong><span class="first-three">Edu</span>cation</strong></h3>
             <hr />
             <h4><strong>Code Fellows</strong></h4>
             <h5><strong>Advanced Python Development</strong></h5>
             <p>March 2018</p>
         </section>
         <section>
-            <h3><strong>Projects</strong></h3>
+            <h3><strong><span class="first-three">Pro</span>jects</strong></h3>
             <hr />
             <!-- Section to highlight past software related projects -->
             <div>
@@ -239,7 +243,7 @@
         </section>
         <article>
             <!-- Article tag used since this could be used on any page -->
-            <h3><strong>Reach Me Directly</strong></h3>
+            <h3><strong><span class="first-three">Rea</span>ch Me Directly</strong></h3>
             <hr />
             <!-- Form uses a post method and 4 different input requirements.  -->
             <form method="post" enctype="multipart/form-data">
