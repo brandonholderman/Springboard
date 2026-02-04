@@ -21,7 +21,7 @@
             <h1><strong>Brandon Holderman</strong></h1>
             <h2>Seattle, WA 98121</h2>
             <!-- Image sourced from my personal github with size altered to better fit page -->
-            <img src="https://avatars.githubusercontent.com/u/18756859?v=4" alt="image of resume owner" height="250"
+            <img id="profile-pic" src="https://avatars.githubusercontent.com/u/18756859?v=4" alt="image of resume owner" height="250"
                 width="250" />
             <table class="contact-table">
                 <!-- Table used for a clean and easy way to seperate content -->
@@ -51,18 +51,18 @@
         </article>
     </header>
     <main>
-        <section>
+        <section class="skills">
             <h3><strong><span class="first-three">Ski</span>lls</strong></h3>
             <hr />
             <!-- Altered skills section to utilize table -->
             <table>
-                <caption>Skill Table</caption>
+                <!-- <caption>Skill Table</caption>
                 <thead>
                     <tr>
                         <th>Type</th>
                         <th>Name</th>
                     </tr>
-                </thead>
+                </thead> -->
                 <tbody>
                     <tr>
                         <td>Programming Languages:</td>
@@ -80,6 +80,7 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
 
             <!-- Section with unordered list of my skills -->
             <!-- <h3><strong>Skills</strong></h3>
@@ -95,115 +96,117 @@
             </ul>
         </section> -->
 
-            <section>
+            <section class="experience">
                 <!-- Section to highlight my work experience. With each job seperated into their own section and using unordered lists for job functions -->
                 <h3><strong><span class="first-three">Exp</span>erience</strong></h3>
                 <hr />
-                <div class="amazon">
-                    <!-- Use of strong throughout to highlight most important information -->
-                    <h4><strong>Amazon</strong></h4>
-                    <h5><strong>Data Analyst</strong></h5>
-                    <p>June 2022 - Present</p>
-                    <ul>
-                        <li>
-                            Led system validation and configuration efforts across 3,000+
-                            retail locations, ensuring system reliability, data accuracy, and
-                            seamless integration into Amazon&apos;s order and delivery
-                            networks.
-                        </li>
-                        <li>
-                            Built automated notification bots with Python to deliver real-time
-                            stakeholder updates, increasing efficiency and ensuring consistent
-                            communication across multiple teams.
-                        </li>
-                        <li>
-                            Partner with operations and IT leaders to document and optimize
-                            system workflows across retail, supply chain, and delivery
-                            systems, ensuring alignment with enterprise applications.
-                        </li>
-                        <li>
-                            Re-engineered reporting infrastructure with SQL and Python,
-                            creating dashboards that improved decision-making and cut
-                            reporting time by 33%.
-                        </li>
-                        <li>
-                            Designed and implemented automated lifecycle trackers that reduced
-                            system misconfigurations by 60% and provided real-time operational
-                            visibility.
-                        </li>
-                        <li>
-                            Developed SOPs, training materials, and functional documentation
-                            to streamline onboarding, configuration adoption, and cross-team
-                            knowledge transfer.
-                        </li>
-                        <li>
-                            Provided application support and analytics for supply chain and
-                            order management workflows, cutting ticket resolution time by 40%.
-                        </li>
-                        <li>
-                            Conducted deep-dive analysis into inventory and shipment systems,
-                            identifying and resolving workflow bottlenecks and discrepancies.
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <!-- Each job and details wrapped in their own div -->
-                    <h4><strong>Domicile, Inc.</strong></h4>
-                    <h5><strong>Functional Analyst</strong></h5>
-                    <p>August 2019 - July 2021</p>
-                    <ul>
-                        <li>
-                            Served as functional liaison translating stakeholder business
-                            needs into actionable system requirements, design specifications,
-                            and process improvements.
-                        </li>
-                        <li>
-                            Supported the implementation and stabilization of a new property
-                            management and reservation system, ensuring workflow continuity
-                            and system integration.
-                        </li>
-                        <li>
-                            Collaborated cross-functionally with technical teams and vendors
-                            to research system capabilities, resolve data duplication issues,
-                            and implement scalable enhancements.
-                        </li>
-                        <li>
-                            Documented business processes, built functional specifications,
-                            and provided training that reduced blocker resolution times by
-                            25%.
-                        </li>
-                        <li>
-                            Built internal tools and dashboards with Javascript, enabling
-                            faster troubleshooting and improved support workflows.
-                        </li>
-                        <li>
-                            Cross-functionally supported sales and marketing teams with system
-                            enhancements, contributing to revenue growth from $140K to $4.5M.
-                        </li>
-                        <li>
-                            Conducted periodic customer and partner surveys to help interpret
-                            user data and community feedback, to drive insights and assist
-                            product development.
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <!-- Section continuing work experience but using an ordered list -->
-                    <h4><strong>Code Fellows</strong></h4>
-                    <h5><strong>Teaching Assistant</strong></h5>
-                    <p>September 2018 - May 2019</p>
-                    <ol>
-                        <li>
-                            Delivered hands-on coaching for students learning JavaScript,
-                            HTML, and CSS, guiding them through debugging, problem-solving,
-                            and technical growth.
-                        </li>
-                        <li>
-                            Provided individualized mentorship to help students build strong
-                            technical foundations—reinforcing the value of curiosity, rigor,
-                            and clarity in complex problem-solving.
-                        </li>
-                    </ol>
+                <div class="jobs">
+                    <div>
+                        <!-- Use of strong throughout to highlight most important information -->
+                        <h4><strong>Amazon</strong></h4>
+                        <h5><strong>Data Analyst</strong></h5>
+                        <p>June 2022 - Present</p>
+                        <ul>
+                            <li>
+                                Led system validation and configuration efforts across 3,000+
+                                retail locations, ensuring system reliability, data accuracy, and
+                                seamless integration into Amazon&apos;s order and delivery
+                                networks.
+                            </li>
+                            <li>
+                                Built automated notification bots with Python to deliver real-time
+                                stakeholder updates, increasing efficiency and ensuring consistent
+                                communication across multiple teams.
+                            </li>
+                            <li>
+                                Partner with operations and IT leaders to document and optimize
+                                system workflows across retail, supply chain, and delivery
+                                systems, ensuring alignment with enterprise applications.
+                            </li>
+                            <li>
+                                Re-engineered reporting infrastructure with SQL and Python,
+                                creating dashboards that improved decision-making and cut
+                                reporting time by 33%.
+                            </li>
+                            <li>
+                                Designed and implemented automated lifecycle trackers that reduced
+                                system misconfigurations by 60% and provided real-time operational
+                                visibility.
+                            </li>
+                            <li>
+                                Developed SOPs, training materials, and functional documentation
+                                to streamline onboarding, configuration adoption, and cross-team
+                                knowledge transfer.
+                            </li>
+                            <li>
+                                Provided application support and analytics for supply chain and
+                                order management workflows, cutting ticket resolution time by 40%.
+                            </li>
+                            <li>
+                                Conducted deep-dive analysis into inventory and shipment systems,
+                                identifying and resolving workflow bottlenecks and discrepancies.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <!-- Each job and details wrapped in their own div -->
+                        <h4><strong>Domicile, Inc.</strong></h4>
+                        <h5><strong>Functional Analyst</strong></h5>
+                        <p>August 2019 - July 2021</p>
+                        <ul>
+                            <li>
+                                Served as functional liaison translating stakeholder business
+                                needs into actionable system requirements, design specifications,
+                                and process improvements.
+                            </li>
+                            <li>
+                                Supported the implementation and stabilization of a new property
+                                management and reservation system, ensuring workflow continuity
+                                and system integration.
+                            </li>
+                            <li>
+                                Collaborated cross-functionally with technical teams and vendors
+                                to research system capabilities, resolve data duplication issues,
+                                and implement scalable enhancements.
+                            </li>
+                            <li>
+                                Documented business processes, built functional specifications,
+                                and provided training that reduced blocker resolution times by
+                                25%.
+                            </li>
+                            <li>
+                                Built internal tools and dashboards with Javascript, enabling
+                                faster troubleshooting and improved support workflows.
+                            </li>
+                            <li>
+                                Cross-functionally supported sales and marketing teams with system
+                                enhancements, contributing to revenue growth from $140K to $4.5M.
+                            </li>
+                            <li>
+                                Conducted periodic customer and partner surveys to help interpret
+                                user data and community feedback, to drive insights and assist
+                                product development.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <!-- Section continuing work experience but using an ordered list -->
+                        <h4><strong>Code Fellows</strong></h4>
+                        <h5><strong>Teaching Assistant</strong></h5>
+                        <p>September 2018 - May 2019</p>
+                        <ol>
+                            <li>
+                                Delivered hands-on coaching for students learning JavaScript,
+                                HTML, and CSS, guiding them through debugging, problem-solving,
+                                and technical growth.
+                            </li>
+                            <li>
+                                Provided individualized mentorship to help students build strong
+                                technical foundations—reinforcing the value of curiosity, rigor,
+                                and clarity in complex problem-solving.
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </section>
             <section class="education">

@@ -23,6 +23,17 @@ body {
     padding: 2%;
 }
 
+#profile-pic {
+    border-radius: 50%;
+    border: 2px solid lime;
+    box-shadow: #ffcc00 1px 0 10px;
+}
+
+.skills table {
+    display: flex;
+    /* justify-content: center; */
+}
+
 .first-three {
     color: lime;
 }
@@ -60,7 +71,7 @@ a {
     color: #115ff0;
 }
 
-.amazon h4,
+.jobs h4,
 h5,
 p {
     margin: 0;
