@@ -9,7 +9,7 @@ header {
 
 .contact-table {
     display: flex;
-    justify-content: center;
+    justify-content: end;
 }
 
 body {
@@ -27,6 +27,8 @@ body {
     border-radius: 50%;
     border: 2px solid lime;
     box-shadow: #ffcc00 1px 0 10px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .skills table {
