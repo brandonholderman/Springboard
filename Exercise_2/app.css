@@ -128,5 +128,11 @@ textarea {
 }
 
 [type="submit"]:hover {
-    background: lime;
+    background: white;
+    color: lime;
+}
+
+footer {
+    text-align: center;
+    font-size: small;
 }
