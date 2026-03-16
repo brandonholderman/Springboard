@@ -3,88 +3,161 @@ html {
     font-family: "Roboto", sans-serif;
 }
 
+/* Moved all header elements back to center fromt he previous assignment, as that is my prferred look. */
 header {
     text-align: center;
 }
 
 .contact-table {
     display: flex;
-    justify-content: end;
-}
-
-body {
-    color: aliceblue;
-    margin-left: 15%;
-    margin-right: 15%;
-}
-
-#body-box {
-    border: 1px solid white;
-    padding: 2%;
+    justify-content: center;
 }
 
 #profile-pic {
     border-radius: 50%;
     border: 2px solid lime;
     box-shadow: #ffcc00 1px 0 10px;
-    display: flex;
-    justify-content: flex-start;
 }
 
-.skills table {
-    display: flex;
-    /* justify-content: center; */
+@media screen and (max-width: 600px) {
+        body {
+        color: aliceblue;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    #body-box {
+        border: 1px solid white;
+        padding: 2%;
+    }
+    
+    
+    .skills table {
+        display: flex;
+        /* justify-content: center; */
+    }
+    
+    .first-three {
+        color: lime;
+    }
+    
+    h1 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h2 {
+        margin-top: 0;
+    }
+    
+    h3 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 25px;
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h4 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 21px;
+        text-shadow: 1px 1px 2px pink;
+        margin-bottom: 0;
+    }
+    
+    h5 {
+        font-size: 17px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #115ff0;
+    }
+    
+    .jobs h4,
+    h5,
+    p {
+        margin: 0;
+    }
+    
+    
+    /* The following form styling was sourced from https: //codepen.io/anon/embed/jOwNvO?default-tab=result&height=500&slug-hash=AIJpe&theme-id=1#result-box */
+    .contact-form {
+        max-width: 500px;
+        /* margin: 50px auto; */
+        margin-bottom: 2%;
+    }
 }
 
-.first-three {
-    color: lime;
-}
-
-h1 {
-    /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
-    text-shadow: #ffcc00 1px 0 10px;
-    margin-bottom: 0;
-}
-
-h2 {
-    margin-top: 0;
-}
-
-h3 {
-    /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
-    font-size: 25px;
-    text-shadow: #ffcc00 1px 0 10px;
-    margin-bottom: 0;
-}
-
-h4 {
-    /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
-    font-size: 21px;
-    text-shadow: 1px 1px 2px pink;
-    margin-bottom: 0;
-}
-
-h5 {
-    font-size: 17px;
-}
-
-a {
-    text-decoration: none;
-    color: #115ff0;
-}
-
-.jobs h4,
-h5,
-p {
-    margin: 0;
-}
-
-
-/* The following form styling was sourced from https: //codepen.io/anon/embed/jOwNvO?default-tab=result&height=500&slug-hash=AIJpe&theme-id=1#result-box */
-.contact-form {
-    max-width: 420px;
-    /* margin: 50px auto; */
-    margin-bottom: 1%;
+@media screen and (min-width: 1024px) {
+    /* Media query for desktop view */
+    body {
+        color: aliceblue;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    #body-box {
+        border: 1px solid white;
+        padding: 2%;
+    }
+    
+    
+    .skills table {
+        display: flex;
+        /* justify-content: center; */
+    }
+    
+    .first-three {
+        color: lime;
+    }
+    
+    h1 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h2 {
+        margin-top: 0;
+    }
+    
+    h3 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 25px;
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h4 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 21px;
+        text-shadow: 1px 1px 2px pink;
+        margin-bottom: 0;
+    }
+    
+    h5 {
+        font-size: 17px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #115ff0;
+    }
+    
+    .jobs h4,
+    h5,
+    p {
+        margin: 0;
+    }
+    
+    
+    /* The following form styling was sourced from https: //codepen.io/anon/embed/jOwNvO?default-tab=result&height=500&slug-hash=AIJpe&theme-id=1#result-box */
+    .contact-form {
+        max-width: 500px;
+        /* margin: 50px auto; */
+        margin-bottom: 2%;
+    }
 }
 
 .form-input {
