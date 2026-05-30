@@ -1,10 +1,9 @@
 let lower = 'abcdefghijklmnopqrstuvwxyz'
 let upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-// upper = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase()
+
 
 
 function letterOccurrence(word) {
-    let count = 0
     let lowerArr = []
     let upperArr = []
 
@@ -23,10 +22,11 @@ function letterOccurrence(word) {
     }
 
     for (let j of lowerArr) {
-        let nonUnique = j
-
-        if (lowerArr.indexOf(lowerArr[nonUnique]) === nonUnique) {
-
+        if (counted[j] !== undefined) {
+            counted[j]++
+        } else {
+            counted[j] = 1
+        }
     }
     return counted
 }
