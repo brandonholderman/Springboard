@@ -1,0 +1,37 @@
+html {
+    background-color: #464646;
+}
+
+header {
+    text-align: center;
+}
+
+.contact-table {
+    margin-left: 43%;
+}
+
+body {
+    color: aliceblue;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.first-three {
+    color: lime;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 21px;
+}
+
+h5 {
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}

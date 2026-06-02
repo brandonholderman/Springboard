@@ -1,0 +1,164 @@
+/* =========================
+   Mobile-first (default)
+   ========================= */
+
+html {
+    background-color: #323438;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    color: aliceblue;
+    margin: 0;
+    /* mobile-friendly default */
+    padding: 0 5%;
+    /* small side padding instead of large margins */
+}
+
+header {
+    text-align: center;
+}
+
+#body-box {
+    border: 1px solid white;
+    padding: 4%;
+    /* a bit more breathing room on small screens */
+}
+
+.contact-table {
+    display: flex;
+    justify-content: center;
+}
+
+#profile-pic {
+    border-radius: 50%;
+    border: 2px solid lime;
+    box-shadow: #ffcc00 1px 0 10px;
+}
+
+.skills table {
+    display: flex;
+    /* justify-content: center; */
+}
+
+.first-three {
+    color: lime;
+}
+
+h1 {
+    text-shadow: #ffcc00 1px 0 10px;
+    margin-bottom: 0;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+h3 {
+    font-size: 25px;
+    text-shadow: #ffcc00 1px 0 10px;
+    margin-bottom: 0;
+}
+
+h4 {
+    font-size: 21px;
+    text-shadow: 1px 1px 2px pink;
+    margin-bottom: 0;
+}
+
+h5 {
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+    color: #115ff0;
+}
+
+/* NOTE: Your original selector `.jobs h4, h5, p` affects ALL h5 and p globally.
+   This is the equivalent, but *scoped* to .jobs (usually what was intended). */
+.jobs h4,
+.jobs h5,
+.jobs p {
+    margin: 0;
+}
+
+/* Contact form */
+.contact-form {
+    max-width: 420px;
+    margin: 0 auto;
+    /* center on mobile too */
+    margin-bottom: 1%;
+}
+
+.form-input {
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 5px;
+    line-height: 22px;
+    background-color: transparent;
+    border: 2px solid lime;
+    transition: all 0.3s;
+    padding: 13px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+/* Fix: original had `form-input:focus` (missing dot) */
+.form-input:focus {
+    border: 2px solid lime;
+}
+
+textarea {
+    height: 150px;
+    line-height: 150%;
+    resize: vertical;
+}
+
+[type="submit"] {
+    width: 100%;
+    background: lime;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: all 0.3s;
+    margin-top: -4px;
+    font-weight: 700;
+}
+
+[type="submit"]:hover {
+    background: lime;
+}
+
+/* =========================
+   Larger screens (tablet+)
+   ========================= */
+@media (min-width: 768px) {
+    body {
+        padding: 0;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    #body-box {
+        padding: 2%;
+    }
+}
+
+/* =========================
+   Desktop (wider screens)
+   ========================= */
+@media (min-width: 1024px) {
+    body {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}

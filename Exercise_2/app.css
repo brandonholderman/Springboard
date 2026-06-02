@@ -1,0 +1,213 @@
+html {
+    background-color: #323438;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Moved all header elements back to center fromt he previous assignment, as that is my prferred look. */
+header {
+    text-align: center;
+}
+
+.contact-table {
+    display: flex;
+    justify-content: center;
+}
+
+#profile-pic {
+    border-radius: 50%;
+    border: 2px solid lime;
+    box-shadow: #ffcc00 1px 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+        body {
+        color: aliceblue;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    #body-box {
+        border: 1px solid white;
+        padding: 2%;
+    }
+    
+    
+    .skills table {
+        display: flex;
+        /* justify-content: center; */
+    }
+    
+    .first-three {
+        color: lime;
+    }
+    
+    h1 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h2 {
+        margin-top: 0;
+    }
+    
+    h3 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 25px;
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h4 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 21px;
+        text-shadow: 1px 1px 2px pink;
+        margin-bottom: 0;
+    }
+    
+    h5 {
+        font-size: 17px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #115ff0;
+    }
+    
+    .jobs h4,
+    h5,
+    p {
+        margin: 0;
+    }
+    
+    
+    /* The following form styling was sourced from https: //codepen.io/anon/embed/jOwNvO?default-tab=result&height=500&slug-hash=AIJpe&theme-id=1#result-box */
+    .contact-form {
+        max-width: 500px;
+        /* margin: 50px auto; */
+        margin-bottom: 2%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Media query for desktop view */
+    body {
+        color: aliceblue;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    
+    #body-box {
+        border: 1px solid white;
+        padding: 2%;
+    }
+    
+    
+    .skills table {
+        display: flex;
+        /* justify-content: center; */
+    }
+    
+    .first-three {
+        color: lime;
+    }
+    
+    h1 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h2 {
+        margin-top: 0;
+    }
+    
+    h3 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 25px;
+        text-shadow: #ffcc00 1px 0 10px;
+        margin-bottom: 0;
+    }
+    
+    h4 {
+        /* Shadow sourced from MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-shadow */
+        font-size: 21px;
+        text-shadow: 1px 1px 2px pink;
+        margin-bottom: 0;
+    }
+    
+    h5 {
+        font-size: 17px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #115ff0;
+    }
+    
+    .jobs h4,
+    h5,
+    p {
+        margin: 0;
+    }
+    
+    
+    /* The following form styling was sourced from https: //codepen.io/anon/embed/jOwNvO?default-tab=result&height=500&slug-hash=AIJpe&theme-id=1#result-box */
+    .contact-form {
+        max-width: 500px;
+        /* margin: 50px auto; */
+        margin-bottom: 2%;
+    }
+}
+
+.form-input {
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 5px;
+    line-height: 22px;
+    background-color: transparent;
+    border: 2px solid lime;
+    transition: all 0.3s;
+    padding: 13px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+form-input:focus {
+    border: 2px solid lime;
+}
+
+textarea {
+    height: 150px;
+    line-height: 150%;
+    resize: vertical;
+}
+
+[type="submit"] {
+    width: 100%;
+    background: lime;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: all 0.3s;
+    margin-top: -4px;
+    font-weight: 700;
+}
+
+[type="submit"]:hover {
+    background: white;
+    color: lime;
+}
+
+footer {
+    text-align: center;
+    font-size: small;
+}
