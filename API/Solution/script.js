@@ -1,3 +1,5 @@
+// SOLUTION WAS PROVIDED FOR REFERENCE BUT DOES NOT FUNCTION. MY CODE DOES.
+
 document.addEventListener("DOMContentLoaded", function ()
 {
 	const loginForm = document.getElementById("login-form");
