@@ -48,7 +48,8 @@ Category: The name given to the structure containing clues on the same topic.
   ]
 }
  */
-
+// let countInput
+// const url = `https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
 const NUMBER_OF_CATEGORIES = 6; // The number of categories you will be fetching. You can change this number.
 const NUMBER_OF_CLUES_PER_CATEGORY = 5; // The number of clues you will be displaying per category. You can change this number.
@@ -72,6 +73,12 @@ let categories = []; // The categories with clues fetched from the API.
   ... more categories
 ]
  */
+
+// Testing API
+async function apiCall(countInput) {
+  let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`)
+    console.log(response)  
+}
 
 let activeClue = null; // Currently selected clue data.
 let activeClueMode = 0; // Controls the flow of #active-clue element while selecting a clue, displaying the question of selected clue, and displaying the answer to the question.
