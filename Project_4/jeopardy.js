@@ -56,8 +56,8 @@ const activeClues = document.querySelector('#active-clue')
 const spinner = document.querySelector('#spinner')
 
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
-const NUMBER_OF_CATEGORIES = randomCategory() ?? 6; // The number of categories you will be fetching. You can change this number.
-const NUMBER_OF_CLUES_PER_CATEGORY = 5; // The number of clues you will be displaying per category. You can change this number.
+const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
+const NUMBER_OF_CLUES_PER_CATEGORY = randomClues(); // The number of clues you will be displaying per category. You can change this number.
 
 let categories = []; // The categories with clues fetched from the API.
 /*
@@ -97,23 +97,36 @@ function randomCategory(category) {
  return category
 }
 
-// Testing API
+function randomClues(clues) {
+ clues = Math.floor(Math.random() * 5) + 1
+ return clues
+}
+
+// API calls
 async function callByCount(countInput) {
-  let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`)
-  // console.log(response.data) 
-  if (response.status === 200) {
-    stopLoadingWheel()
-  }    
-  return response
+  try {
+    let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`)
+    // console.log(response.data) 
+    if (response.status === 200) {
+      stopLoadingWheel()
+    }    
+    return response
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 async function callByCategory(categoryID) {
-  let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/category?id=${categoryID}`)
-  console.log(response.data)
-  if (response.status === 200) {
-    stopLoadingWheel()
+  try {
+    let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/category?id=${categoryID}`)
+    // console.log(response.data)
+    if (response.status === 200) {
+      stopLoadingWheel()
+    }
+    return response
+  } catch (err) {
+    throw new Error(err)
   }
-  return response
 }
 
 
@@ -177,11 +190,15 @@ async function setupTheGame () {
 async function getCategoryIds () {
   let ids = []; // todo set after fetching
 
-  // todo fetch NUMBER_OF_CATEGORIES amount of categories :: DONE
-  let response = await callByCount(NUMBER_OF_CATEGORIES)
-  response.data.forEach(id => {
-    ids.push(id.id)
-  })
+  try {
+    // todo fetch NUMBER_OF_CATEGORIES amount of categories :: DONE
+    let response = await callByCount(NUMBER_OF_CATEGORIES)
+    response.data.forEach(id => {
+      ids.push(id.id)
+    })
+  } catch (err) {
+    throw new Error(err)
+  }
   return ids;
 }
 
@@ -209,17 +226,26 @@ async function getCategoryIds () {
  */
 async function getCategoryData (categoryId) {
   const categoryWithClues = {
-    id: categoryId,
+    id: null,
     title: undefined, // todo set after fetching
     clues: [] // todo set after fetching
   };
 
-  // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues
-  let response = await getCategoryIds()
-  response.forEach(id => {
-    console.log(id)
-  })
-  return categoryWithClues;
+  categoryId = await getCategoryIds() // populates param on function call
+  try {
+    categoryId.forEach(async (val) => { // Iterates through all category IDs returned
+      // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
+      let response = await callByCategory(val) // API call for categories with IDs matching those returned above
+      // console.log(response.data.title)
+      categoryWithClues.id = val
+      categoryWithClues.title = response.data.title
+      categoryWithClues.clues = response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
+      // console.log(categoryWithClues)
+      return categoryWithClues;
+    })
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 /**
