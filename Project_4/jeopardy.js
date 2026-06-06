@@ -56,8 +56,10 @@ const activeClues = document.querySelector('#active-clue')
 const spinner = document.querySelector('#spinner')
 
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
-const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
-const NUMBER_OF_CLUES_PER_CATEGORY = randomClues(); // The number of clues you will be displaying per category. You can change this number.
+// const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
+const NUMBER_OF_CATEGORIES = 6
+// const NUMBER_OF_CLUES_PER_CATEGORY = randomClues(); // The number of clues you will be displaying per category. You can change this number.
+const NUMBER_OF_CLUES_PER_CATEGORY = 3
 
 let categories = []; // The categories with clues fetched from the API.
 /*
@@ -89,17 +91,16 @@ function stopLoadingWheel() {
 }
 
 function resetGame() {
-
+  // TODO: 
 }
 
-function randomCategory(category) {
- category = Math.floor(Math.random() * 100) + 1
- return category
+function randomCategory() {
+ return Math.floor(Math.random() * 14) + 1
 }
 
-function randomClues(clues) {
- clues = Math.floor(Math.random() * 5) + 1
- return clues
+function randomClues() {
+ return Math.floor(Math.random() * 5) + 1
+ 
 }
 
 // API calls
@@ -176,7 +177,8 @@ async function setupTheGame () {
 
   // todo fetch the game data (categories with clues)
 
-  // todo fill the table
+  // todo fill the table :: DONEISH - Function completed and working but displayed elements need refining and additional logic added. 
+  fillTable()
 }
 
 /**
@@ -224,25 +226,22 @@ async function getCategoryIds () {
  * - Use /category endpoint of the API.
  * - In the API, not all clues have a value. You can assign your own value or skip that clue.
  */
-async function getCategoryData (categoryId) {
-  const categoryWithClues = {
-    id: null,
-    title: undefined, // todo set after fetching
-    clues: [] // todo set after fetching
-  };
-
-  categoryId = await getCategoryIds() // populates param on function call
+async function getCategoryData(categoryId) {
   try {
-    categoryId.forEach(async (val) => { // Iterates through all category IDs returned
-      // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
-      let response = await callByCategory(val) // API call for categories with IDs matching those returned above
-      // console.log(response.data.title)
-      categoryWithClues.id = val
-      categoryWithClues.title = response.data.title
-      categoryWithClues.clues = response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
-      // console.log(categoryWithClues)
-      return categoryWithClues;
-    })
+    categoryId = await getCategoryIds() // populates param on function call
+    const categoryCall = await Promise.all(
+      categoryId.map(async (val) => { // Iterates through all category IDs returned
+        // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
+        const response = await callByCategory(val) // API call for categories with IDs from those returned above
+        return {
+           id: val,
+           title: response.data.title,
+           clues: response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
+         }
+      })
+    )
+    console.log(categoryCall)
+    return categories = categoryCall
   } catch (err) {
     throw new Error(err)
   }
@@ -262,6 +261,20 @@ async function getCategoryData (categoryId) {
  */
 function fillTable (categories) {
   // todo
+  for (let category of categories) {
+    let categoryHead = document.createElement('th')
+    let categoryRow = document.createElement('tr')
+    categoryHead.innerHTML = category.title
+    categoriesTable.appendChild(categoryHead)
+    cluesTable.appendChild(categoryRow)
+    
+    for (let clue of category.clues) {
+      // Create a tr, then the td within in it for each question.
+      let categoryBody = document.createElement('td') // Need to separate each of these and make each clickable to reveal their matching answer
+      categoryBody.innerHTML = '- ' + clue.question
+      categoryRow.appendChild(categoryBody)
+    }
+  }
 }
 
 $(".clue").on("click", handleClickOfClue);
@@ -315,3 +328,71 @@ function handleClickOfActiveClue (event) {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async function getCategoryData (categoryId) {
+//   const categoryWithClues = {
+//     id: undefined,
+//     title: undefined, // todo set after fetching
+//     clues: [] // todo set after fetching
+//   };
+
+//   categoryId = await getCategoryIds() // populates param on function call
+//   try {
+//     categoryId.map(async (val) => { // Iterates through all category IDs returned
+//       // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
+//       let response = await callByCategory(val) // API call for categories with IDs matching those returned above
+//       // console.log(response.data)
+//       // console.log(response.data.clues)
+
+//       // return categoryWithClues = {
+//       //    id: val,
+//       //    title: response.data.title,
+//       //    clues: response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
+//       //  }
+//       categoryWithClues.id = val
+//       categoryWithClues.title = response.data.title
+//       categoryWithClues.clues = response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY) // This is grabbing 1 set of clues and appending it to every object.
+//       // console.log(categoryWithClues)
+//       // categories.push({categoryWithClues})
+//       // return categoryWithClues
+//     })
+//     // return categories
+//   } catch (err) {
+//     throw new Error(err)
+//   }
+// }
