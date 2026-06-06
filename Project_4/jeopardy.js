@@ -52,12 +52,13 @@ Category: The name given to the structure containing clues on the same topic.
 // const url = `https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`
 const categoriesTable = document.querySelector('#categories')
 const cluesTable = document.querySelector('#clues')
+const cluesBody = document.querySelector('#clues-body')
 const activeClues = document.querySelector('#active-clue')
 const spinner = document.querySelector('#spinner')
 
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
 // const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
-const NUMBER_OF_CATEGORIES = 6
+const NUMBER_OF_CATEGORIES = 3
 // const NUMBER_OF_CLUES_PER_CATEGORY = randomClues(); // The number of clues you will be displaying per category. You can change this number.
 const NUMBER_OF_CLUES_PER_CATEGORY = 3
 
@@ -263,17 +264,27 @@ function fillTable (categories) {
   // todo
   for (let category of categories) {
     let categoryHead = document.createElement('th')
-    let categoryRow = document.createElement('tr')
-    categoryHead.innerHTML = category.title
-    categoriesTable.appendChild(categoryHead)
-    cluesTable.appendChild(categoryRow)
     
-    for (let clue of category.clues) {
-      // Create a tr, then the td within in it for each question.
-      let categoryBody = document.createElement('td') // Need to separate each of these and make each clickable to reveal their matching answer
-      categoryBody.innerHTML = '- ' + clue.question
-      categoryRow.appendChild(categoryBody)
+    categoryHead.innerHTML = category.title
+    categoryHead.setAttribute('scope', 'row')
+    
+    categoriesTable.appendChild(categoryHead)
+    
+  }
+  
+  const maxClues = Math.max(...categories.map(c => c.clues.length));
+  
+  for (let i = 0; i < maxClues; i++) {
+    let categoryCol = document.createElement('tr')
+    categoryCol.setAttribute('scope', 'col')
+
+    for (let clue of categories) {
+      console.log(clue.clues.map(val => val.question))
+      let clueQuestion = document.createElement('td') // Need to separate each of these and make each clickable to reveal their matching answer
+      clueQuestion.innerHTML = '- ' + clue.clues.map(val => val.question)
+      categoryCol.appendChild(clueQuestion)
     }
+    cluesBody.appendChild(categoryCol)
   }
 }
 
