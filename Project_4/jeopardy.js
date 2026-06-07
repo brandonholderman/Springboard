@@ -101,7 +101,6 @@ function randomCategory() {
 
 function randomClues() {
  return Math.floor(Math.random() * 5) + 1
- 
 }
 
 // API calls
@@ -228,7 +227,7 @@ async function getCategoryIds () {
 async function getCategoryData(categoryId) {
   try {
     categoryId = await getCategoryIds() // populates param on function call
-    const categoryCall = await Promise.all(
+    const categoryCall = await Promise.all( // <-- Learning lesson here. Did not know about Promise.all when chaining multiple async functions until this project.
       categoryId.map(async (val) => { // Iterates through all category IDs returned
         // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
         const response = await callByCategory(val) // API call for categories with IDs from those returned above
@@ -259,7 +258,7 @@ async function getCategoryData(categoryId) {
  * - To this row elements (tr) should add an event listener (handled by the `handleClickOfClue` function) and set their IDs with category and clue IDs. This will enable you to detect which clue is clicked.
  */
 function fillTable (categories) {
-  // todo :: DONE
+  // todo :: In Progress; Notes below
   for (let category of categories) {
     let categoryHead = document.createElement('th')
     
@@ -269,11 +268,15 @@ function fillTable (categories) {
   
   for (let i = 0; i < NUMBER_OF_CLUES_PER_CATEGORY; i++) {
     let categoryCol = document.createElement('tr')
+    categoryCol.addEventListener('click', function(e) {
+      console.log('Question selected', e.target)
+    })
 
     for (let clue of categories) {
       let clueQuestion = document.createElement('td')
 
-      clueQuestion.innerHTML = clue.clues[i].question
+      clueQuestion.setAttribute('class', 'clue')
+      clueQuestion.innerHTML = clue.clues[i].value // Changed from displaying question. Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
       categoryCol.appendChild(clueQuestion)
     }
     clueBody.appendChild(categoryCol)
@@ -296,7 +299,7 @@ $(".clue").on("click", handleClickOfClue);
  */
 function handleClickOfClue (event) {
   // todo find and remove the clue from the categories
-
+  
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
 }
 
@@ -314,8 +317,9 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  */
 function handleClickOfActiveClue (event) {
   // todo display answer if displaying a question
-
+  
   // todo clear if displaying an answer
+
   // todo after clear end the game when no clues are left
 
   if (activeClueMode === 1) {
