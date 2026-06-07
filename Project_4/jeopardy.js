@@ -52,15 +52,15 @@ Category: The name given to the structure containing clues on the same topic.
 // const url = `https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`
 const categoriesTable = document.querySelector('#categories')
 const cluesTable = document.querySelector('#clues')
-const cluesBody = document.querySelector('#clues-body')
+const clueBody = document.querySelector('#clues-body')
 const activeClues = document.querySelector('#active-clue')
 const spinner = document.querySelector('#spinner')
 
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
 // const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
-const NUMBER_OF_CATEGORIES = 3
+const NUMBER_OF_CATEGORIES = 6
 // const NUMBER_OF_CLUES_PER_CATEGORY = randomClues(); // The number of clues you will be displaying per category. You can change this number.
-const NUMBER_OF_CLUES_PER_CATEGORY = 3
+const NUMBER_OF_CLUES_PER_CATEGORY = 5
 
 let categories = []; // The categories with clues fetched from the API.
 /*
@@ -154,10 +154,8 @@ $("#play").on("click", handleClickOfPlay);
  * - Sets up the game when the play button is clickable.
  */
 function handleClickOfPlay () {
-  // todo set the game up if the play button is clickable :: In Progress
+  // todo set the game up if the play button is clickable :: DONE
   setupTheGame()
-  callByCategory(2)
-  // callByCount(3)
 }
 
 /**
@@ -176,10 +174,10 @@ async function setupTheGame () {
   loadingWheel()
   // todo reset the DOM (table, button text, the end text)
 
-  // todo fetch the game data (categories with clues)
-
-  // todo fill the table :: DONEISH - Function completed and working but displayed elements need refining and additional logic added. 
-  fillTable()
+  // todo fetch the game data (categories with clues) :: DONE
+  await getCategoryData()
+  // todo fill the table :: DONE-ISH - Function completed and working but displayed elements need refining and additional logic added. 
+  fillTable(categories)
 }
 
 /**
@@ -191,7 +189,7 @@ async function setupTheGame () {
  * - Request as many categories as possible, such as 100. Randomly pick as many categories as given in the `NUMBER_OF_CATEGORIES` constant, if the number of clues in the category is enough (<= `NUMBER_OF_CLUES` constant).
  */
 async function getCategoryIds () {
-  let ids = []; // todo set after fetching
+  let ids = []; // todo set after fetching :: DONE
 
   try {
     // todo fetch NUMBER_OF_CATEGORIES amount of categories :: DONE
@@ -261,32 +259,27 @@ async function getCategoryData(categoryId) {
  * - To this row elements (tr) should add an event listener (handled by the `handleClickOfClue` function) and set their IDs with category and clue IDs. This will enable you to detect which clue is clicked.
  */
 function fillTable (categories) {
-  // todo
+  // todo :: DONE
   for (let category of categories) {
     let categoryHead = document.createElement('th')
     
-    categoryHead.innerHTML = category.title
-    categoryHead.setAttribute('scope', 'row')
-    
+    categoryHead.innerHTML = category.title.toUpperCase()
     categoriesTable.appendChild(categoryHead)
-    
   }
   
-  const maxClues = Math.max(...categories.map(c => c.clues.length));
-  
-  for (let i = 0; i < maxClues; i++) {
+  for (let i = 0; i < NUMBER_OF_CLUES_PER_CATEGORY; i++) {
     let categoryCol = document.createElement('tr')
-    categoryCol.setAttribute('scope', 'col')
 
     for (let clue of categories) {
-      console.log(clue.clues.map(val => val.question))
-      let clueQuestion = document.createElement('td') // Need to separate each of these and make each clickable to reveal their matching answer
-      clueQuestion.innerHTML = '- ' + clue.clues.map(val => val.question)
+      let clueQuestion = document.createElement('td')
+
+      clueQuestion.innerHTML = clue.clues[i].question
       categoryCol.appendChild(clueQuestion)
     }
-    cluesBody.appendChild(categoryCol)
+    clueBody.appendChild(categoryCol)
   }
 }
+
 
 $(".clue").on("click", handleClickOfClue);
 
@@ -340,70 +333,3 @@ function handleClickOfActiveClue (event) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function getCategoryData (categoryId) {
-//   const categoryWithClues = {
-//     id: undefined,
-//     title: undefined, // todo set after fetching
-//     clues: [] // todo set after fetching
-//   };
-
-//   categoryId = await getCategoryIds() // populates param on function call
-//   try {
-//     categoryId.map(async (val) => { // Iterates through all category IDs returned
-//       // todo fetch the category with NUMBER_OF_CLUES_PER_CATEGORY amount of clues :: DONE 
-//       let response = await callByCategory(val) // API call for categories with IDs matching those returned above
-//       // console.log(response.data)
-//       // console.log(response.data.clues)
-
-//       // return categoryWithClues = {
-//       //    id: val,
-//       //    title: response.data.title,
-//       //    clues: response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
-//       //  }
-//       categoryWithClues.id = val
-//       categoryWithClues.title = response.data.title
-//       categoryWithClues.clues = response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY) // This is grabbing 1 set of clues and appending it to every object.
-//       // console.log(categoryWithClues)
-//       // categories.push({categoryWithClues})
-//       // return categoryWithClues
-//     })
-//     // return categories
-//   } catch (err) {
-//     throw new Error(err)
-//   }
-// }
