@@ -316,9 +316,9 @@ function handleClickOfClue (event) {
   // todo find and remove the clue from the categories :: DONE
   if (event.target.className === 'clue') {
     activeClueMode = 1
-    activeClue = // Update clues object to set the value to an array containing both the question and the answer.
+    activeClue = clues[event.target.id][1] // Or should this be set to the target identifier to eb used in the second click?
     console.log('Clue Clicked!', event.target)
-    return event.target.innerHTML = clues[event.target.id]
+    return event.target.innerHTML = clues[event.target.id][0]
   } 
   console.log(clues[event.target.id])
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
@@ -340,7 +340,9 @@ $("#active-clue").on("click", handleClickOfActiveClue);
 function handleClickOfActiveClue (event) {
   // Needs to set the active clue variable defined above. If the card is currently flipped to show a question, this click will reveal the answer.
   // todo display answer if displaying a question
-  
+  if (activeClueMode === 1) {
+    return event.target.innerHTML = activeClue
+  }
   // todo clear if displaying an answer
 
   // todo after clear end the game when no clues are left
