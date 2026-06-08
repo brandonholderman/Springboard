@@ -137,7 +137,7 @@ function getClues(input) {
   for (let category of categories) {
     for (let clue of category.clues) {
       let clueID = clue.id
-      clues[clueID] = clue.question 
+      clues[clueID] = [ clue.question, clue.answer ]
     }
   }
   return clues
@@ -287,7 +287,6 @@ function fillTable (categories) {
       let clueQuestion = document.createElement('td')
 
       clueQuestion.setAttribute('class', 'clue')
-      // Need to set an identifier that referneces or connects the data to the element 
       clueQuestion.setAttribute('id', clue.clues[i].id)
       clueQuestion.innerHTML = clue.clues[i].value // Changed from displaying question. Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
       categoryCol.appendChild(clueQuestion)
@@ -314,15 +313,16 @@ $(".clue").on("click", handleClickOfClue);
  *
  */
 function handleClickOfClue (event) {
-  // todo find and remove the clue from the categories :: In Progress
+  // todo find and remove the clue from the categories :: DONE
   if (event.target.className === 'clue') {
     activeClueMode = 1
+    activeClue = // Update clues object to set the value to an array containing both the question and the answer.
     console.log('Clue Clicked!', event.target)
+    return event.target.innerHTML = clues[event.target.id]
   } 
-  let getClues = getClues()
-  // Create global helper function that unpacks the clues object and stores it in a seperate object. To prevent having multiple nested for loops.
-  console.log(getClues(event.target.id))
+  console.log(clues[event.target.id])
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
+
 }
 
 $("#active-clue").on("click", handleClickOfActiveClue);
