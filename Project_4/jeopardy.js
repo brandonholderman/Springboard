@@ -63,6 +63,8 @@ const NUMBER_OF_CATEGORIES = 6
 const NUMBER_OF_CLUES_PER_CATEGORY = 5
 
 let categories = []; // The categories with clues fetched from the API.
+
+let clues = {}
 /*
 [
   {
@@ -81,6 +83,7 @@ let categories = []; // The categories with clues fetched from the API.
   ... more categories
 ]
  */
+
 
 function loadingWheel() {
   spinner.style.display = 'block'
@@ -130,7 +133,15 @@ async function callByCategory(categoryID) {
   }
 }
 
-
+function getClues(input) {
+  for (let category of categories) {
+    for (let clue of category.clues) {
+      let clueID = clue.id
+      clues[clueID] = clue.question 
+    }
+  }
+  return clues
+}
 
 
 let activeClue = null; // Currently selected clue data.
@@ -175,6 +186,7 @@ async function setupTheGame () {
 
   // todo fetch the game data (categories with clues) :: DONE
   await getCategoryData()
+  getClues(categories)
   // todo fill the table :: DONE-ISH - Function completed and working but displayed elements need refining and additional logic added. 
   fillTable(categories)
 }
@@ -266,16 +278,17 @@ function fillTable (categories) {
     categoriesTable.appendChild(categoryHead)
   }
   
+  // Update to use get clues function
   for (let i = 0; i < NUMBER_OF_CLUES_PER_CATEGORY; i++) {
     let categoryCol = document.createElement('tr')
-    categoryCol.addEventListener('click', function(e) {
-      console.log('Question selected', e.target)
-    })
+    categoryCol.addEventListener('click', handleClickOfClue)
 
     for (let clue of categories) {
       let clueQuestion = document.createElement('td')
 
       clueQuestion.setAttribute('class', 'clue')
+      // Need to set an identifier that referneces or connects the data to the element 
+      clueQuestion.setAttribute('id', clue.clues[i].id)
       clueQuestion.innerHTML = clue.clues[i].value // Changed from displaying question. Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
       categoryCol.appendChild(clueQuestion)
     }
@@ -296,10 +309,19 @@ $(".clue").on("click", handleClickOfClue);
  * - Remove the clicked clue from categories since each clue should be clickable only once. Don't forget to remove the category if all the clues are removed.
  * - Don't forget to update the `activeClueMode` variable.
  *
+ * let activeClue = null; // Currently selected clue data.
+ * let activeClueMode = 0; // Controls the flow of #active-clue element while selecting a clue, displaying the question of selected clue, and displaying the answer to the question.
+ *
  */
 function handleClickOfClue (event) {
-  // todo find and remove the clue from the categories
-  
+  // todo find and remove the clue from the categories :: In Progress
+  if (event.target.className === 'clue') {
+    activeClueMode = 1
+    console.log('Clue Clicked!', event.target)
+  } 
+  let getClues = getClues()
+  // Create global helper function that unpacks the clues object and stores it in a seperate object. To prevent having multiple nested for loops.
+  console.log(getClues(event.target.id))
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
 }
 
@@ -316,6 +338,7 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  * - Don't forget to update the `activeClueMode` variable.
  */
 function handleClickOfActiveClue (event) {
+  // Needs to set the active clue variable defined above. If the card is currently flipped to show a question, this click will reveal the answer.
   // todo display answer if displaying a question
   
   // todo clear if displaying an answer
