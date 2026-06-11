@@ -6,13 +6,11 @@
     <meta charset="UTF-8">
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    
     <title>Jeopardy!</title>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-    >
   </head>
   <body>
     <h1>Jeopardy!</h1>
@@ -38,10 +36,19 @@
         </tbody>
       </table>
 
-      <div id="active-clue">
+      <div id="active-clue" class="overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <!-- When a clue is clicked, show the question here. -->
         <!-- When a question is clicked, show the answer here. -->
         <!-- When the game ends, show it here. -->
+        <button class="close-btn" id="closeBtn" aria-label="Close modal">&times;</button>
+         <div class="modal" id="modal">
+          <h2 id="modal-title"></h2>
+          <p id="display-qa"></p>
+          <div class="modal-actions">
+            <button class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="btn-confirm" id="confirmBtn">Reveal Answer</button>
+          </div>
+         </div>
       </div>
     </section>
 

@@ -48,13 +48,19 @@ Category: The name given to the structure containing clues on the same topic.
   ]
 }
  */
-// let countInput
-// const url = `https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`
+
 const categoriesTable = document.querySelector('#categories')
 const cluesTable = document.querySelector('#clues')
 const clueBody = document.querySelector('#clues-body')
-const activeClues = document.querySelector('#active-clue')
 const spinner = document.querySelector('#spinner')
+
+// Modal elements
+const overlay = document.querySelector('#active-clue')
+const closeBtn = document.querySelector('#closeBtn')
+const cancelBtn = document.querySelector('#cancelBtn')
+const confirmBtn = document.querySelector('#confirmBtn')
+const modalTitle = document.querySelector('#modal-title')
+const displayQA = document.querySelector('#display-qa')
 
 const API_URL = "https://rithm-jeopardy.herokuapp.com/api/"; // The URL of the API.
 // const NUMBER_OF_CATEGORIES = randomCategory(); // The number of categories you will be fetching. You can change this number.
@@ -65,6 +71,10 @@ const NUMBER_OF_CLUES_PER_CATEGORY = 5
 let categories = []; // The categories with clues fetched from the API.
 
 let clues = {}
+
+let currentAnswer
+let revertEl 
+let revertValue
 /*
 [
   {
@@ -136,8 +146,9 @@ async function callByCategory(categoryID) {
 function getClues(input) {
   for (let category of categories) {
     for (let clue of category.clues) {
+      // console.log(clue)
       let clueID = clue.id
-      clues[clueID] = [ clue.question, clue.answer ]
+      clues[clueID] = [ clue.question, clue.answer, clue.value ]
     }
   }
   return clues
@@ -246,7 +257,7 @@ async function getCategoryData(categoryId) {
         return {
            id: val,
            title: response.data.title,
-           clues: response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY)
+           clues: response.data.clues.filter(item => item).slice(0, NUMBER_OF_CLUES_PER_CATEGORY) // Add field for if clue has been seen. 
          }
       })
     )
@@ -277,8 +288,8 @@ function fillTable (categories) {
     categoryHead.innerHTML = category.title.toUpperCase()
     categoriesTable.appendChild(categoryHead)
   }
-  
-  // Update to use get clues function
+
+
   for (let i = 0; i < NUMBER_OF_CLUES_PER_CATEGORY; i++) {
     let categoryCol = document.createElement('tr')
     categoryCol.addEventListener('click', handleClickOfClue)
@@ -288,7 +299,7 @@ function fillTable (categories) {
 
       clueQuestion.setAttribute('class', 'clue')
       clueQuestion.setAttribute('id', clue.clues[i].id)
-      clueQuestion.innerHTML = clue.clues[i].value // Changed from displaying question. Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
+      clueQuestion.innerHTML = clue.clues[i].value // Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
       categoryCol.appendChild(clueQuestion)
     }
     clueBody.appendChild(categoryCol)
@@ -296,7 +307,29 @@ function fillTable (categories) {
 }
 
 
+function openModal() {
+  activeClue = document.activeElement
+  overlay.classList.add('active')
+  closeBtn.focus()
+}
+
+function closeModal() {
+  activeClueMode = 0
+  revertEl.innerHTML = revertValue
+  overlay.classList.remove('active')
+  if (activeClue) activeClue.focus()
+}
+
+function revealAnswer(event) {
+  if (activeClueMode === 1) {
+    activeClueMode = 2
+    displayQA.innerHTML = currentAnswer
+  }
+}
+
 $(".clue").on("click", handleClickOfClue);
+$(cancelBtn).on("click", closeModal);
+$(confirmBtn).on("click", revealAnswer);
 
 /**
  * Manages the behavior when a clue is clicked.
@@ -314,13 +347,22 @@ $(".clue").on("click", handleClickOfClue);
  */
 function handleClickOfClue (event) {
   // todo find and remove the clue from the categories :: DONE
-  if (event.target.className === 'clue') {
+  if (event.target.className === 'clue' && activeClueMode === 0) {
     activeClueMode = 1
-    activeClue = clues[event.target.id][1] // Or should this be set to the target identifier to eb used in the second click?
-    console.log('Clue Clicked!', event.target)
-    return event.target.innerHTML = clues[event.target.id][0]
-  } 
+    revertEl = event.target
+    event.target.innerHTML = ''
+    displayQA.innerHTML = clues[event.target.id][0]
+    currentAnswer = clues[event.target.id][1]
+    revertValue = clues[event.target.id][2]
+    openModal()
+  }
+
   console.log(clues[event.target.id])
+
+
+  // TODO: create another if statement to handle if a click occurs on a different target element. 
+   // It should hide the answer/question currently open and open the question for the new target element.   
+
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
 
 }
@@ -339,26 +381,27 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  */
 function handleClickOfActiveClue (event) {
   // Needs to set the active clue variable defined above. If the card is currently flipped to show a question, this click will reveal the answer.
+  
   // todo display answer if displaying a question
-  if (activeClueMode === 1) {
-    return event.target.innerHTML = activeClue
-  }
+  revealAnswer(event)
+
   // todo clear if displaying an answer
 
   // todo after clear end the game when no clues are left
 
-  if (activeClueMode === 1) {
-    activeClueMode = 2;
-    $("#active-clue").html(activeClue.answer);
-  } else if (activeClueMode === 2) {
-    activeClueMode = 0;
-    $("#active-clue").html(null);
+  // if (activeClueMode === 1) {
+  //   activeClueMode = 2;
+  //   console.log('active clue clicked')
+  //   $("#active-clue").html(activeClue); // Change to just activeClue since I'm setting this value in the first click.
+  // } else if (activeClueMode === 2) {
+  //   activeClueMode = 0;
+  //   $("#active-clue").html(null);
 
-    if (categories.length === 0) {
-      isPlayButtonClickable = true;
-      $("#play").text("Restart the Game!");
-      $("#active-clue").html("The End!");
-    }
-  }
+  //   if (categories.length === 0) { // create a way to remove values as they're clicked.
+  //     isPlayButtonClickable = true;
+  //     $("#play").text("Restart the Game!");
+  //     $("#active-clue").html("The End!");
+  //   }
+  // }
 }
 
