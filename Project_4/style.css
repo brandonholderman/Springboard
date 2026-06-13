@@ -21,12 +21,55 @@
 {
   text-decoration: line-through;
 }
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.game-buttons {
+  display: flex;
+  margin-right: 20px;
+}
+
+.game-buttons button {
+  padding: 20px 60px;
+  background: darkblue;
+  border: separate;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin: 10px;
+  width: 20rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.game-buttons button:hover {
+  transform: translateY(-5px);
+  background: rgb(0, 255, 115);
+  color: black;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  font-family: "Bitcount Grid Double", system-ui;
+  font-size: 10rem;
+  font-weight: 400;
+  color: #115ff4;
+}
 
 table {
   border-collapse: separate;
   table-layout: fixed;
   width: 75%;
   border-spacing: 5px;
+  margin-left: 12%;
+  margin-right: 10%;
 }
 
 th {
@@ -104,13 +147,17 @@ td:hover {
         .modal {
           background: #fff;
           border-radius: 14px;
-          padding: 40px 36px 32px;
+          padding: 200px 200px 32px;
           width: min(480px, 90vw);
           box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
           transform: translateY(18px) scale(0.97);
           transition: transform 0.25s ease, opacity 0.25s ease;
           opacity: 0;
           position: relative;
+        }
+
+        .modal p {
+          font-size: 70px;
         }
     
         .overlay.active .modal {

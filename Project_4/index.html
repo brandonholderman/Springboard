@@ -6,20 +6,23 @@
     <meta charset="UTF-8">
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat&family=Roboto&family=Bitcount+Grid+Double&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     
     <title>Jeopardy!</title>
 
   </head>
   <body>
-    <h1>Jeopardy!</h1>
-
-    <button id="play">
-      <!-- When the game ends, update the text. -->
-      Start the Game!
-    </button>
-    <button id="reset-button">Reset Game</button>
+    <div class="heading">
+      <h1>Jeopardy!</h1>
+      <div class="game-buttons">
+        <button id="play">
+          <!-- When the game ends, update the text. -->
+          Start the Game!
+        </button>
+        <button id="reset-button">Reset Game</button>
+      </div>
+    </div>
 
     <section>
       <table>
@@ -40,7 +43,6 @@
         <!-- When a clue is clicked, show the question here. -->
         <!-- When a question is clicked, show the answer here. -->
         <!-- When the game ends, show it here. -->
-        <button class="close-btn" id="closeBtn" aria-label="Close modal">&times;</button>
          <div class="modal" id="modal">
           <h2 id="modal-title"></h2>
           <p id="display-qa"></p>

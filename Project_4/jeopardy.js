@@ -105,7 +105,9 @@ function stopLoadingWheel() {
 }
 
 function resetGame() {
-  // TODO: 
+  // TODO: DONE
+  activeClueMode = 0
+  document.location.reload()
 }
 
 function randomCategory() {
@@ -166,6 +168,7 @@ let activeClueMode = 0; // Controls the flow of #active-clue element while selec
 let isPlayButtonClickable = true; // Only clickable when the game haven't started yet or ended. Prevents the button to be clicked during the game.
 
 $("#play").on("click", handleClickOfPlay);
+$("#reset-button").on("click", resetGame);
 
 /**
  * Manages the behavior of the play button (start or restart) when clicked.
@@ -194,7 +197,7 @@ async function setupTheGame () {
   // todo show the spinner while setting up the game :: DONE
   loadingWheel()
   // todo reset the DOM (table, button text, the end text)
-
+  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list) 
   // todo fetch the game data (categories with clues) :: DONE
   await getCategoryData()
   getClues(categories)
