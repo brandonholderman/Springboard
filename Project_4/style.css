@@ -100,6 +100,10 @@ td:hover {
   color: black;
 }
 
+#spinner {
+  text-align: center;
+  font-size: 3rem;
+}
 
 /* Testing CSS */
 
@@ -148,7 +152,7 @@ td:hover {
           background: #fff;
           border-radius: 14px;
           padding: 200px 200px 32px;
-          width: min(480px, 90vw);
+          width: min(480px, 100vw);
           box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
           transform: translateY(18px) scale(0.97);
           transition: transform 0.25s ease, opacity 0.25s ease;
@@ -156,9 +160,9 @@ td:hover {
           position: relative;
         }
 
-        .modal p {
+        /* .modal p {
           font-size: 70px;
-        }
+        } */
     
         .overlay.active .modal {
           transform: translateY(0) scale(1);
@@ -195,10 +199,10 @@ td:hover {
         }
     
         .modal p {
-          font-size: 1rem;
-          line-height: 1.65;
+          font-size: 3rem;
+          /* line-height: 1.5; */
           color: #6b7280;
-          margin-bottom: 28px;
+          margin-bottom: 15rem;
           font-weight: bold;
         }
     

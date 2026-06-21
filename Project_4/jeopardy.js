@@ -75,6 +75,7 @@ let clues = {}
 let currentAnswer
 let revertEl 
 let revertValue
+let currentID
 /*
 [
   {
@@ -97,7 +98,7 @@ let revertValue
 
 function loadingWheel() {
   spinner.style.display = 'block'
-  spinner.style.paddingTop = '15px'
+  spinner.style.paddingTop = '4rem'
 }
 
 function stopLoadingWheel() {
@@ -313,13 +314,14 @@ function fillTable (categories) {
 function openModal() {
   activeClue = document.activeElement
   overlay.classList.add('active')
-  closeBtn.focus()
+  // closeBtn.focus()
 }
 
 function closeModal() {
   activeClueMode = 0
   revertEl.innerHTML = revertValue
   overlay.classList.remove('active')
+  confirmBtn.innerHTML = 'Reveal Answer'
   if (activeClue) activeClue.focus()
 }
 
@@ -327,12 +329,32 @@ function revealAnswer(event) {
   if (activeClueMode === 1) {
     activeClueMode = 2
     displayQA.innerHTML = currentAnswer
+    confirmBtn.innerHTML = 'End Question'
+  }
+}
+
+function endQuestion(event) {
+  if (activeClueMode === 2) {
+    activeClueMode = 0
+    overlay.classList.remove('active')
+    confirmBtn.innerHTML = 'Reveal Answer'
+
+    delete clues[currentID]
+    console.log(clues)
+    if (activeClue) activeClue.focus()
   }
 }
 
 $(".clue").on("click", handleClickOfClue);
 $(cancelBtn).on("click", closeModal);
-$(confirmBtn).on("click", revealAnswer);
+// $(confirmBtn).on("click", revealAnswer);
+$(confirmBtn).on("click", function(event) {
+  if (activeClueMode === 1) {
+    return revealAnswer(event)
+  } else if (activeClueMode === 2) {
+    return endQuestion(event)
+  }
+});
 
 /**
  * Manages the behavior when a clue is clicked.
@@ -355,19 +377,19 @@ function handleClickOfClue (event) {
     revertEl = event.target
     event.target.innerHTML = ''
     displayQA.innerHTML = clues[event.target.id][0]
+    currentID = event.target.id
     currentAnswer = clues[event.target.id][1]
     revertValue = clues[event.target.id][2]
+    console.log(currentID)
     openModal()
   }
-
-  console.log(clues[event.target.id])
 
 
   // TODO: create another if statement to handle if a click occurs on a different target element. 
    // It should hide the answer/question currently open and open the question for the new target element.   
 
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
-
+  // Task handled by removing the value from being displayed in the box.
 }
 
 $("#active-clue").on("click", handleClickOfActiveClue);
