@@ -166,9 +166,14 @@ let activeClueMode = 0; // Controls the flow of #active-clue element while selec
 2: Showing an answer. If the answer is clicked, it empties (transits back to 0).
  */
 
-let isPlayButtonClickable = true; // Only clickable when the game haven't started yet or ended. Prevents the button to be clicked during the game.
+let isPlayButtonClickable = true; // DONE: Only clickable when the game haven't started yet or ended. Prevents the button to be clicked during the game.
 
-$("#play").on("click", handleClickOfPlay);
+$("#play").on("click", function() {
+  if (!isPlayButtonClickable) return; 
+
+  $("#play").prop('disabled', true);
+  handleClickOfPlay();
+});
 $("#reset-button").on("click", resetGame);
 
 /**
@@ -198,11 +203,16 @@ async function setupTheGame () {
   // todo show the spinner while setting up the game :: DONE
   loadingWheel()
   // todo reset the DOM (table, button text, the end text)
-  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list) 
+  // DONE: Handled with resetGame function
+
+  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list)
+
+  isPlayButtonClickable = false
+  
   // todo fetch the game data (categories with clues) :: DONE
   await getCategoryData()
   getClues(categories)
-  // todo fill the table :: DONE-ISH - Function completed and working but displayed elements need refining and additional logic added. 
+  // todo fill the table :: DONE
   fillTable(categories)
 }
 
@@ -389,7 +399,7 @@ function handleClickOfClue (event) {
    // It should hide the answer/question currently open and open the question for the new target element.   
 
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
-  // Task handled by removing the value from being displayed in the box.
+  // DONE: Task handled by removing the value from being displayed in the box.
 }
 
 $("#active-clue").on("click", handleClickOfActiveClue);
@@ -411,8 +421,10 @@ function handleClickOfActiveClue (event) {
   revealAnswer(event)
 
   // todo clear if displaying an answer
+  // DONE: Handled with endQuestion function above
 
   // todo after clear end the game when no clues are left
+
 
   // if (activeClueMode === 1) {
   //   activeClueMode = 2;
