@@ -68,13 +68,13 @@ const NUMBER_OF_CATEGORIES = 6
 const NUMBER_OF_CLUES_PER_CATEGORY = 5
 
 let categories = []; // The categories with clues fetched from the API.
-
 let clues = {}
 
 let currentAnswer
 let revertEl 
 let revertValue
 let currentID
+
 /*
 [
   {
@@ -122,7 +122,6 @@ function randomClues() {
 async function callByCount(countInput) {
   try {
     let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/categories?count=${countInput}`)
-    // console.log(response.data) 
     if (response.status === 200) {
       stopLoadingWheel()
     }    
@@ -135,7 +134,6 @@ async function callByCount(countInput) {
 async function callByCategory(categoryID) {
   try {
     let response = await axios.get(`https://rithm-jeopardy.herokuapp.com/api/category?id=${categoryID}`)
-    // console.log(response.data)
     if (response.status === 200) {
       stopLoadingWheel()
     }
@@ -148,7 +146,6 @@ async function callByCategory(categoryID) {
 function getClues(input) {
   for (let category of categories) {
     for (let clue of category.clues) {
-      // console.log(clue)
       let clueID = clue.id
       clues[clueID] = [ clue.question, clue.answer, clue.value ]
     }
@@ -204,7 +201,7 @@ async function setupTheGame () {
   // todo reset the DOM (table, button text, the end text)
   // DONE: Handled with resetGame function
 
-  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list)
+  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list) :: DONE. Handled below.
 
   isPlayButtonClickable = false
   
@@ -274,7 +271,6 @@ async function getCategoryData(categoryId) {
          }
       })
     )
-    console.log(categoryCall)
     return categories = categoryCall
   } catch (err) {
     throw new Error(err)
@@ -294,7 +290,7 @@ async function getCategoryData(categoryId) {
  * - To this row elements (tr) should add an event listener (handled by the `handleClickOfClue` function) and set their IDs with category and clue IDs. This will enable you to detect which clue is clicked.
  */
 function fillTable (categories) {
-  // todo :: In Progress; Notes below
+  // todo :: DONE
   for (let category of categories) {
     let categoryHead = document.createElement('th')
     
@@ -312,7 +308,7 @@ function fillTable (categories) {
 
       clueQuestion.setAttribute('class', 'clue')
       clueQuestion.setAttribute('id', clue.clues[i].id)
-      clueQuestion.innerHTML = clue.clues[i].value ?? 'Daily Double' // Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
+      clueQuestion.innerHTML = clue.clues[i].value ?? 'Daily Double' 
       categoryCol.appendChild(clueQuestion)
     }
     clueBody.appendChild(categoryCol)
@@ -345,6 +341,7 @@ function gameOverModal() {
 function revealAnswer(event) {
   if (activeClueMode === 1) {
     activeClueMode = 2
+    revertEl.className = 'answered' // changes class name so clue is no longer clickable
     displayQA.innerHTML = currentAnswer
     confirmBtn.innerHTML = 'End Question'
     cancelBtn.style.display = 'none'
@@ -405,7 +402,6 @@ function handleClickOfClue (event) {
     displayQA.innerHTML = clues[event.target.id][0]
     currentAnswer = clues[event.target.id][1]
     revertValue = clues[event.target.id][2]
-    console.log(currentID)
     openModal()
   }
 
@@ -426,7 +422,7 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  * - Don't forget to update the `activeClueMode` variable.
  */
 function handleClickOfActiveClue (event) {
-  // todo display answer if displaying a question
+  // todo display answer if displaying a question :: DONE
   revealAnswer(event)
 
   // todo clear if displaying an answer
@@ -435,15 +431,16 @@ function handleClickOfActiveClue (event) {
   // todo after clear end the game when no clues are left
   // DONE: Handled with handleGameEnd function above
 
+  // Did not use below code in favor of my own solution.
   // if (activeClueMode === 1) {
   //   activeClueMode = 2;
   //   console.log('active clue clicked')
-  //   $("#active-clue").html(activeClue); // Change to just activeClue since I'm setting this value in the first click.
+  //   $("#active-clue").html(activeClue); 
   // } else if (activeClueMode === 2) {
   //   activeClueMode = 0;
   //   $("#active-clue").html(null);
 
-  //   if (categories.length === 0) { // create a way to remove values as they're clicked.
+  //   if (categories.length === 0) { 
   //     isPlayButtonClickable = true;
   //     $("#play").text("Restart the Game!");
   //     $("#active-clue").html("The End!");
