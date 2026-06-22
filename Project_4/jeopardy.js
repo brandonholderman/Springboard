@@ -111,7 +111,7 @@ function resetGame() {
 }
 
 function randomCategory() {
- return Math.floor(Math.random() * 14) + 1
+ return Math.floor(Math.random() * 6) + 1
 }
 
 function randomClues() {
@@ -165,10 +165,10 @@ let activeClueMode = 0; // Controls the flow of #active-clue element while selec
 let isPlayButtonClickable = true; // DONE: Only clickable when the game haven't started yet or ended. Prevents the button to be clicked during the game.
 
 $("#play").on("click", function() {
-  if (!isPlayButtonClickable) return; 
+  if (!isPlayButtonClickable) return 
 
-  $("#play").prop('disabled', true);
-  handleClickOfPlay();
+  $("#play").prop('disabled', true)
+  handleClickOfPlay()
 });
 $("#reset-button").on("click", resetGame);
 
@@ -336,6 +336,7 @@ function gameOverModal() {
   cancelBtn.style.display = 'none'
   confirmBtn.innerHTML = 'End Game'
   overlay.classList.add('active')
+  overlay.style.backgroundColor = 'red'
 }
 
 function revealAnswer(event) {
@@ -423,7 +424,9 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  */
 function handleClickOfActiveClue (event) {
   // todo display answer if displaying a question :: DONE
-  revealAnswer(event)
+  if (event.target.id === confirmBtn) {
+    revealAnswer(event)
+  }
 
   // todo clear if displaying an answer
   // DONE: Handled with endQuestion function above
