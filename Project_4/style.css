@@ -105,27 +105,6 @@ td:hover {
   font-size: 3rem;
 }
 
-
-.open-btn {
-  padding: 14px 32px;
-  background: #4f46e5;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.open-btn:hover {
-  background: #4338ca;
-}
-
-.open-btn:active {
-  transform: scale(0.97);
-}
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -164,27 +143,6 @@ td:hover {
 }
 
 
-.close-btn {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  line-height: 1;
-  color: #9ca3af;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: color 0.15s, background 0.15s;
-}
-
-.close-btn:hover {
-  color: #111;
-  background: #f3f4f6;
-}
-
-
 .modal h2 {
   font-size: 1.35rem;
   font-weight: 700;
@@ -194,7 +152,6 @@ td:hover {
 
 .modal p {
   font-size: 3rem;
-  /* line-height: 1.5; */
   color: #6b7280;
   margin-bottom: 15rem;
   font-weight: bold;

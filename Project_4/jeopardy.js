@@ -435,6 +435,7 @@ function handleClickOfActiveClue (event) {
   // DONE: Handled with handleGameEnd function above
 
   // Did not use below code in favor of my own solution.
+
   // if (activeClueMode === 1) {
   //   activeClueMode = 2;
   //   console.log('active clue clicked')
