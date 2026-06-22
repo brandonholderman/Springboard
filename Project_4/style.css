@@ -136,7 +136,6 @@ td:hover {
   position: relative;
 }
 
-
 .overlay.active .modal {
   transform: translateY(0) scale(1);
   opacity: 1;
@@ -163,6 +162,7 @@ td:hover {
   gap: 10px;
 }
 
+
 .btn-cancel {
   padding: 10px 22px;
   background: none;
@@ -179,6 +179,7 @@ td:hover {
   background: #f9fafb;
   border-color: #9ca3af;
 }
+
 
 .btn-confirm {
   padding: 10px 22px;

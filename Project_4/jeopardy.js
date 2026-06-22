@@ -201,7 +201,7 @@ async function setupTheGame () {
   // todo reset the DOM (table, button text, the end text)
   // DONE: Handled with resetGame function
 
-  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list) :: DONE. Handled below.
+  // If activeGameMode = 3 (Set to 3 after all tiles have been selected and removed from categories list) :: DONE. Handled with endQuestion function.
 
   isPlayButtonClickable = false
   
@@ -333,6 +333,7 @@ function closeModal() {
 
 function gameOverModal() {
   displayQA.innerHTML = 'Game Over!'
+  displayQA.style.textAlign = 'center'
   cancelBtn.style.display = 'none'
   confirmBtn.innerHTML = 'End Game'
   overlay.classList.add('active')
