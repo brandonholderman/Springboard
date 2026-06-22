@@ -56,7 +56,6 @@ const spinner = document.querySelector('#spinner')
 
 // Modal elements
 const overlay = document.querySelector('#active-clue')
-const closeBtn = document.querySelector('#closeBtn')
 const cancelBtn = document.querySelector('#cancelBtn')
 const confirmBtn = document.querySelector('#confirmBtn')
 const modalTitle = document.querySelector('#modal-title')
@@ -313,7 +312,7 @@ function fillTable (categories) {
 
       clueQuestion.setAttribute('class', 'clue')
       clueQuestion.setAttribute('id', clue.clues[i].id)
-      clueQuestion.innerHTML = clue.clues[i].value // Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
+      clueQuestion.innerHTML = clue.clues[i].value ?? 'Daily Double' // Need to handle case where category doesn't have a question "500 dining out". Change to be a Daily Double.
       categoryCol.appendChild(clueQuestion)
     }
     clueBody.appendChild(categoryCol)
@@ -323,8 +322,9 @@ function fillTable (categories) {
 
 function openModal() {
   activeClue = document.activeElement
+  cancelBtn.style.display = 'block'
+  confirmBtn.innerHTML = 'Reveal Answer'
   overlay.classList.add('active')
-  // closeBtn.focus()
 }
 
 function closeModal() {
@@ -335,11 +335,19 @@ function closeModal() {
   if (activeClue) activeClue.focus()
 }
 
+function gameOverModal() {
+  displayQA.innerHTML = 'Game Over!'
+  cancelBtn.style.display = 'none'
+  confirmBtn.innerHTML = 'End Game'
+  overlay.classList.add('active')
+}
+
 function revealAnswer(event) {
   if (activeClueMode === 1) {
     activeClueMode = 2
     displayQA.innerHTML = currentAnswer
     confirmBtn.innerHTML = 'End Question'
+    cancelBtn.style.display = 'none'
   }
 }
 
@@ -347,24 +355,31 @@ function endQuestion(event) {
   if (activeClueMode === 2) {
     activeClueMode = 0
     overlay.classList.remove('active')
-    confirmBtn.innerHTML = 'Reveal Answer'
 
     delete clues[currentID]
     console.log(clues)
+
     if (activeClue) activeClue.focus()
+    if(Object.keys(clues).length === 0) {
+      activeClueMode = 3
+      gameOverModal()
+    }
   }
 }
 
+
 $(".clue").on("click", handleClickOfClue);
 $(cancelBtn).on("click", closeModal);
-// $(confirmBtn).on("click", revealAnswer);
 $(confirmBtn).on("click", function(event) {
   if (activeClueMode === 1) {
     return revealAnswer(event)
   } else if (activeClueMode === 2) {
     return endQuestion(event)
+  } else if (activeClueMode === 3) {
+    return resetGame()
   }
 });
+
 
 /**
  * Manages the behavior when a clue is clicked.
@@ -386,17 +401,13 @@ function handleClickOfClue (event) {
     activeClueMode = 1
     revertEl = event.target
     event.target.innerHTML = ''
-    displayQA.innerHTML = clues[event.target.id][0]
     currentID = event.target.id
+    displayQA.innerHTML = clues[event.target.id][0]
     currentAnswer = clues[event.target.id][1]
     revertValue = clues[event.target.id][2]
     console.log(currentID)
     openModal()
   }
-
-
-  // TODO: create another if statement to handle if a click occurs on a different target element. 
-   // It should hide the answer/question currently open and open the question for the new target element.   
 
   // todo mark clue as viewed (you can use the class in style.css), display the question at #active-clue
   // DONE: Task handled by removing the value from being displayed in the box.
@@ -415,8 +426,6 @@ $("#active-clue").on("click", handleClickOfActiveClue);
  * - Don't forget to update the `activeClueMode` variable.
  */
 function handleClickOfActiveClue (event) {
-  // Needs to set the active clue variable defined above. If the card is currently flipped to show a question, this click will reveal the answer.
-  
   // todo display answer if displaying a question
   revealAnswer(event)
 
@@ -424,7 +433,7 @@ function handleClickOfActiveClue (event) {
   // DONE: Handled with endQuestion function above
 
   // todo after clear end the game when no clues are left
-
+  // DONE: Handled with handleGameEnd function above
 
   // if (activeClueMode === 1) {
   //   activeClueMode = 2;
