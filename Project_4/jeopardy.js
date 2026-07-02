@@ -308,7 +308,7 @@ function fillTable (categories) {
 
       clueQuestion.setAttribute('class', 'clue')
       clueQuestion.setAttribute('id', clue.clues[i].id)
-      clueQuestion.innerHTML = clue.clues[i].value ?? 'Daily Double' 
+      clueQuestion.innerHTML = clue.clues[i].value ?? 'Daily Double'
       categoryCol.appendChild(clueQuestion)
     }
     clueBody.appendChild(categoryCol)
