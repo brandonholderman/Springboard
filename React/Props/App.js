@@ -1,5 +1,4 @@
-function App ()
-{
+function App () {
 	const inventoryItems = [
 		{name: "Oxygen Tank", type: "Equipment", quantity: 3, price: 150.00},
 		{name: "Freeze-Dried Ice Cream", type: "Food", quantity: 20, price: 5.99},
@@ -13,15 +12,24 @@ function App ()
 		{name: "Thruster Fuel", type: "Fuel", quantity: 50, price: 45.00}
 	];
 
+	(function genID () {
+		inventoryItems.forEach((val, index) => {
+			val.id = index
+		})
+		console.log(inventoryItems)
+	})()
+
 	return (
 		<div>
-			<h1>Inventory</h1>
-			<ol>
-				{/* <!-- TODO: Render each inventory item as a list item. --> */}
-				{inventoryItems.map(data => {
-					return <InventoryItem name={data.name} type={data.type} quantity={data.quantity} price={data.price}/>
-				})}
-			</ol>
+			<Message>
+				<h1>Inventory</h1>
+				<ol>
+					{/* <!-- TODO: Render each inventory item as a list item. :: DONE --> */}
+					{inventoryItems.map(data => {
+						return <InventoryItem key={data.id} name={data.name} type={data.type} quantity={data.quantity} price={data.price} />
+						})}
+				</ol>
+			</Message>
 		</div>
 	);
 }
