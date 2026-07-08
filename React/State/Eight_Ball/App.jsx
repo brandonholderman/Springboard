@@ -1,3 +1,7 @@
+const react = require('react')
+// import { useState } from 'react'
+
+
 function App() {
 
     const ball = [
@@ -29,13 +33,25 @@ function App() {
         })
     })();
 
+    function shakeBall(ballArr) {
+        let shake = Math.floor(Math.random() * ballArr.length)
+        return ballArr.find(data => data.id === shake)
+    }
+
+    let data = shakeBall(ball)  
+
+    function handleClick() {
+        document.location.reload()
+    }
+
     return (
-        <div>
-            {ball.map(data => {
-                return <Ball key={data.id} id={data.id} msg={data.msg} color={data.color} numQues={ball.length} />
-            })}
-        </div>
-    )
+        <>
+            <div className="container">
+                <Ball key={data.id} id={data.id} msg={data.msg} color={data.color} />
+            </div>
+            <button className="roll" onClick={handleClick}>Shake Magic Ball</button>
+        </>
+    ) 
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
