@@ -1,10 +1,10 @@
-const react = require('react')
+// const react = require('react')
 // import { useState } from 'react'
-
+const { useState } = React
 
 function App() {
 
-    const ball = [
+    const eightBall = [
         { msg: "It is certain.", color: "green" },
         { msg: "It is decidedly so.", color: "green" },
         { msg: "Without a doubt.", color: "green" },
@@ -28,28 +28,35 @@ function App() {
     ];
 
     (() => {
-        ball.forEach((val, index) => {
+        eightBall.forEach((val, index) => {
             val.id = index
         })
     })();
+
+    const [ball, setBall] = useState(eightBall)
 
     function shakeBall(ballArr) {
         let shake = Math.floor(Math.random() * ballArr.length)
         return ballArr.find(data => data.id === shake)
     }
 
-    let data = shakeBall(ball)  
-
     function handleClick() {
+        setBall(shakeBall(eightBall))
+    }
+
+    function handleReset() {
         document.location.reload()
     }
 
     return (
         <>
             <div className="container">
-                <Ball key={data.id} id={data.id} msg={data.msg} color={data.color} />
+                <Ball key={ball.id} id={ball.id} msg={ball.msg} color={ball.color} />
             </div>
-            <button className="roll" onClick={handleClick}>Shake Magic Ball</button>
+            <div className="buttons">
+                <button className="roll" onClick={handleClick}>Shake Magic Ball</button>
+                <button className="roll" onClick={handleReset}>Reset Magic Ball</button>
+            </div>
         </>
     ) 
 }

@@ -3,15 +3,22 @@
     height: 500px;
     line-height: 500px;
     border-radius: 50%;
-    font-size: 50px;
+    font-size: 2rem;
     color: #fff;
     text-align: center;
     background: #000;
 }
 
-/* .container {
-    border-style: solid;
-} */
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
 
 /* .fortune {
     display: block;
