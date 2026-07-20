@@ -1,5 +1,3 @@
-// const react = require('react')
-// import { useState } from 'react'
 const { useState } = React
 
 function App() {
@@ -27,13 +25,18 @@ function App() {
         { msg: "Very doubtful.", color: "red" },
     ];
 
+
+    // const [fortuneID, setFortuneID] = useState(null);
+    // const [colorChange, setColorChange] = useState(null);
+    const [colorTally, setColorTally] = useState({});
+    const [countColor, setCountColor] = useState(null);
+    const [ball, setBall] = useState(eightBall);
+    
     (() => {
         eightBall.forEach((val, index) => {
             val.id = index
         })
     })();
-
-    const [ball, setBall] = useState(eightBall)
 
     function shakeBall(ballArr) {
         let shake = Math.floor(Math.random() * ballArr.length)
@@ -41,12 +44,37 @@ function App() {
     }
 
     function handleClick() {
-        setBall(shakeBall(eightBall))
+        setBall(shakeBall(eightBall));
+        tallyColors(ball.color)
     }
 
+    function tallyColors(color) {
+        if (color === undefined) {
+            return
+        } else {
+            setCountColor(color)
+        }
+
+        setColorTally((totalTally) => {
+            const currentCount = totalTally[color] || 0
+
+            return {
+                ...totalTally,
+                [color]: currentCount + 1
+            }
+        })
+
+        console.log(colorTally)
+    };
+    
+    
+    function showRecord() {
+        console.log(Object.entries(colorTally))
+    };
+
     function handleReset() {
-        document.location.reload()
-    }
+        setBall(eightBall)
+    };
 
     return (
         <>
@@ -56,9 +84,12 @@ function App() {
             <div className="buttons">
                 <button className="roll" onClick={handleClick}>Shake Magic Ball</button>
                 <button className="roll" onClick={handleReset}>Reset Magic Ball</button>
+                <button className="roll" onClick={showRecord}>Console</button>
             </div>
+            <hr></hr>
+            <ColorBox />
         </>
-    ) 
+    );
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
