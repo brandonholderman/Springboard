@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import Player from './Player'
-import Enemy from './Enemy'
 import Fire from './Fire'
+import Enemy from './Enemy'
 import Status from './Status'
 import './App.css'
 
 function App() {
-  // const [count, setCount] = useState(0)
 
   return (
     <>
       <Player />
-      <Enemy />
       <Fire />
+      <Enemy />
       <Status />
     </>
   )

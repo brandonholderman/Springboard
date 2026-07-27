@@ -1,14 +1,8 @@
 import { useState } from 'react'
-import './App.css'
+import './Enemy.css'
 
-function Enemy() {
-    // const [count, setCount] = useState(0)
-
-    return (
-        <>
-
-        </>
-    )
+function Enemy(props) {
+    return <p>{props.health}</p>
 }
 
 export default Enemy

@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import './App.css'
+import './Player.css'
 
-function Player() {
-    const [count, setCount] = useState(100)
-
-    return <p>{count}</p>
+function Player(props) {
+    return <p>{props.health}</p>
 }
 
 export default Player

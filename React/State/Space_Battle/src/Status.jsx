@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import './App.css'
+import './Status.css'
 
-function Status() {
+function Status({ status }) {
 
     return (
-        <>
-
-        </>
+        <div className='status-container'>
+            <p>{status}</p>
+        </div>
     )
 }
 
