@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Status from './Status'
 import Player from './Player'
 import Enemy from './Enemy'
-// import Reset from './Reset'
 import './Fire.css'
 
 function Fire() {

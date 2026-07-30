@@ -1,5 +1,8 @@
-function App ()
-{
+import { useState } from "react";
+import MissionControl from "./MissionControl";
+
+
+function App () {
 	const INITIAL_MISSIONS = [
 		{id: 1, name: "Mars Rover", status: "Planned", crew: ["Alice", "Bob"]},
 		{id: 2, name: "Moon Base", status: "Active", crew: ["Charlie", "Dave"]},
@@ -15,6 +18,7 @@ function App ()
 
 	return (
 		<>
+			<MissionControl missions={INITIAL_MISSIONS} />
 		</>
 	);
 }
