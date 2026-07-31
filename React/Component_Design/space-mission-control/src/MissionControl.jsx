@@ -8,9 +8,23 @@ function MissionControl({ missions }) {
     const [missionList, setMissionList] = useState(missions);
     const [missionStatus, setMissionStatus] = useState(null);
 
+    const filterItem = (curcat) => {
+        const newItem = Data.filter((newVal) => {
+            return newVal.category === curcat;
+            // comparing category for displaying data
+        });
+        setItem(newItem);
+    };
+
+    function filterMission(selectedStatus) {
+        if (selectedStatus === )
+    }
+
+
     return (
         <div>
-            <MissionFilter status={missionList.map(mission => mission.status)}/>
+            {/* <MissionFilter status={missionList.map(mission => mission.status)}/> */}
+            <MissionFilter status={missionStatus} onClick={() => filterMission()} />
             {missionList.map(mission => (
                 <MissionCard key={mission.id} id={mission.id} name={mission.name} status={mission.status} crew={mission.crew}/>
             ))}

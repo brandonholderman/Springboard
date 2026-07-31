@@ -8,3 +8,12 @@
     margin: 0.3rem;
     margin-bottom: 0.6rem;
 }
+
+.filter-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px rgba(255, 94, 0, 0.55);
+}
+
+.filter-button:active {
+    transform: scale(0.95);
+}

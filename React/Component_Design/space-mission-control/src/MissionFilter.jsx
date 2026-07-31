@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import './MissionFilter.css'
 
-function MissionFilter() {
+function MissionFilter({ status }) {
+
+    /** 
+     * When a filter button is clicked, only missions that have a the matching status active, will be displayed. 
+     * To achieve this, I need to pass 
+    */
+
+
+     
 
     function showAll() {
 
