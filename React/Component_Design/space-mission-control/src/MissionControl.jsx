@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import MissionCard from "./MissionCard";
-import MissionAction from "./MissionAction";
 import MissionFilter from "./MissionFilter";
 import './MissionControl.css'
 
@@ -11,13 +10,10 @@ function MissionControl({ missions }) {
 
     return (
         <div>
+            <MissionFilter status={missionList.map(mission => mission.status)}/>
             {missionList.map(mission => (
                 <MissionCard key={mission.id} id={mission.id} name={mission.name} status={mission.status} crew={mission.crew}/>
             ))}
-            <div>
-                <MissionFilter />
-                <MissionAction />
-            </div>
         </div>
     )
 }

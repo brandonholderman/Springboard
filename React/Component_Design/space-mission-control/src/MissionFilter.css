@@ -1,0 +1,10 @@
+.filter-button {
+    background-color: black;
+    color: white;
+    width: 7.5rem;
+    height: 3rem;
+    border: 0.15rem solid red;
+    box-shadow: 0 0.1rem 0.3rem rgba(255, 94, 0, 0.4);
+    margin: 0.3rem;
+    margin-bottom: 0.6rem;
+}
