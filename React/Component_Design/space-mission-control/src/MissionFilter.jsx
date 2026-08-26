@@ -1,39 +1,37 @@
 import { useState } from 'react'
 import './MissionFilter.css'
 
-function MissionFilter({ status }) {
+function MissionFilter({ status, children }) {
+    const [active, setActive] = useState(status[0]);
 
-    /** 
-     * When a filter button is clicked, only missions that have a the matching status active, will be displayed. 
-     * To achieve this, I need to pass 
-    */
-
-
-     
-
-    function showAll() {
-
-    }
-
-    function showPlanned() {
-
-    }
-
-    function showActive() {
-
-    }
-
-    function showCompleted() {
-
-    }
+    // const filteredMissions = status.filter(mission => filter === "All" || mission.status === filter);
+    // const visible = active === "All" || childStatus === undefined || childStatus === active;   
 
     return (
-        <div className='filter-container'>
-            <button className='filter-button'>All</button>
-            <button className='filter-button'>Planned</button>
-            <button className='filter-button'>Active</button>
-            <button className='filter-button'>Completed</button>
-        </div>
+        <div className='filter-provider'>
+            <div className='filter-bar'>
+                <div className='filter-btn'>
+                    {status.map((s, i) => (
+                        <button
+                        key={s} 
+                        className={`filter-btn ${active === s ? "filter-btn--active" : ""}` }
+                        onClick={() => setActive(s)}>{s}</button> 
+                    ))}
+                </div>
+            </div>
+            <div className='filter-content'>
+                {children.map((child, i) => {
+                    const childStatus = child?.props?.status;
+                    const isVisible = active === "All" || childStatus === undefined || childStatus === active;
+                    
+                    return (
+                        <div key={child?.key ?? i} style={{ display: isVisible ? "contents" : "none"}}>
+                            {child}
+                        </div>
+                    )
+                })}
+                </div>
+            </div>
     )
 }
 

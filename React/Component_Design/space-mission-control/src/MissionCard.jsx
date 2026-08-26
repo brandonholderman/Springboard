@@ -9,10 +9,7 @@ function MissionCard({ id, name, status, crew }) {
             <h3>{name}</h3>
             <p>Status: {status}</p>
             <div className='crew-list'>
-                Crew: {crew.map((c, i) => <p key={i}>{c}</p>)}
-            </div>
-            <div>
-                <MissionAction />
+                Crew: {crew.join(', ')}
             </div>
         </div>
     )
