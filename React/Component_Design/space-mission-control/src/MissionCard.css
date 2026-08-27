@@ -2,8 +2,15 @@
     border: 0.1rem solid white;
     margin-bottom: 1rem;
     padding-left: 1rem;
+    padding-bottom: 1rem;
 }
 
 .crew-list {
     display: inline;
+}
+
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
 }

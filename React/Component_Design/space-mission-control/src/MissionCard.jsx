@@ -2,7 +2,7 @@ import { useState } from 'react'
 import MissionAction from "./MissionAction";
 import './MissionCard.css'
 
-function MissionCard({ id, name, status, crew }) {
+function MissionCard({ id, name, status, crew, updateStatus }) {
 
     return (
         <div className='mission-card'>
@@ -10,6 +10,9 @@ function MissionCard({ id, name, status, crew }) {
             <p>Status: {status}</p>
             <div className='crew-list'>
                 Crew: {crew.join(', ')}
+            </div>
+            <div className='action-container'>
+                <MissionAction id={id} updateStatus={updateStatus} />
             </div>
         </div>
     )

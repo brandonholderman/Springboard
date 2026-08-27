@@ -10,14 +10,12 @@ function MissionFilter({ status, children }) {
     return (
         <div className='filter-provider'>
             <div className='filter-bar'>
-                <div className='filter-btn'>
-                    {status.map((s, i) => (
-                        <button
-                        key={s} 
-                        className={`filter-btn ${active === s ? "filter-btn--active" : ""}` }
-                        onClick={() => setActive(s)}>{s}</button> 
-                    ))}
-                </div>
+                {status.map((s, i) => (
+                    <button
+                    key={s} 
+                    className={`filter-button ${active === s ? "filter-button--active" : ""}` }
+                    onClick={() => setActive(s)}>{s}</button> 
+                ))}
             </div>
             <div className='filter-content'>
                 {children.map((child, i) => {
