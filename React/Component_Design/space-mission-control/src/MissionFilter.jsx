@@ -4,9 +4,6 @@ import './MissionFilter.css'
 function MissionFilter({ status, children }) {
     const [active, setActive] = useState(status[0]);
 
-    // const filteredMissions = status.filter(mission => filter === "All" || mission.status === filter);
-    // const visible = active === "All" || childStatus === undefined || childStatus === active;   
-
     return (
         <div className='filter-provider'>
             <div className='filter-bar'>

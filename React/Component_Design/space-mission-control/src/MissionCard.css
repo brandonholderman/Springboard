@@ -1,8 +1,12 @@
 .mission-card {
+    display: flex;
     border: 0.1rem solid white;
     margin-bottom: 1rem;
     padding-left: 1rem;
-    padding-bottom: 1rem;
+}
+
+.mission-info {
+    flex: 1;
 }
 
 .crew-list {
@@ -11,6 +15,6 @@
 
 .action-container {
     display: flex;
-    justify-content: flex-end;
     flex-direction: column;
+    padding-top: 0.2rem;
 }
