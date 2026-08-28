@@ -12,4 +12,4 @@ function MissionAction({ id, updateStatus }) {
     )
 }
 
-export default MissionAction
+export default MissionAction;

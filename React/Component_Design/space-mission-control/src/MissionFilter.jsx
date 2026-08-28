@@ -30,4 +30,4 @@ function MissionFilter({ status, children }) {
     )
 }
 
-export default MissionFilter
+export default MissionFilter;

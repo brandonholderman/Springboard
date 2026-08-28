@@ -19,4 +19,4 @@ function MissionCard({ id, name, status, crew, updateStatus }) {
     )
 }
 
-export default MissionCard
+export default MissionCard;

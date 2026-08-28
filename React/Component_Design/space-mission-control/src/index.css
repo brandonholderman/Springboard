@@ -1,4 +1,9 @@
 body {
     background-color: black;
     color: white;
+    font-family: "Nova Square", sans-serif;
+}
+
+header {
+    font-family: "Racing Sans One", sans-serif;
 }
