@@ -1,0 +1,74 @@
+/* .nav-menu { */
+    /* color: white; */
+    /* list-style-type: none; */
+    /* max-height: 0; */
+    /* opacity: 0; */
+    /* overflow: hidden; */
+    /* pointer-events: none; */
+    /* transition: max-height 0.3s cubic-bezier(.4, 0, .2, 1), opacity 0.2s; */
+/* } */
+
+/* .nav-menu.open {
+    color: white;
+    list-style-type: none;
+    text-decoration: none;
+    max-height: 400px;
+    opacity: 1;
+    pointer-events: all;
+} */
+
+.nav-list {
+    list-style-type: none;
+    margin-top: -2.5rem;
+    padding-left: 3rem;
+    border-left: 0.1rem solid #2d2d2d;
+    /* border: 0.5rem solid rgb(56, 54, 54); */
+    /* background-color: rgb(56, 54, 54); */
+}
+
+/* .nav-links {
+    text-decoration: none;
+    color: greenyellow;
+} */
+
+.nav-menu {
+    /* position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1000; */
+
+    /* width: 260px; */
+    /* height: 100vh; */
+    /* padding: 80px 24px 24px; */
+
+    /* background: #121212; */
+    /* border-left: 0.1rem solid #2d2d2d; */
+    /* box-shadow: -8px 0 30px rgba(0, 0, 0, 0.4); */
+
+    /* display: flex;
+    flex-direction: column;*/
+    /* gap: 10rem; */
+
+    /* transform: translateX(100%);
+    transition: transform 0.3s ease; */
+}
+
+/* Add this class with JavaScript when opening */
+/* .nav-menu.open {
+    transform: translateX(0);
+} */
+
+/* Navigation links */
+.nav-menu a {
+    color: #d4d4d4;
+    text-decoration: none;
+    /* padding: 14px 16px; */
+    /* border-radius: 6px; */
+    font-size: 1.5rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    background: #242424;
+    color: #fff;
+}

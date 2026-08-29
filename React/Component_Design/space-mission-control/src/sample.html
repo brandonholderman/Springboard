@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamburger Navigation Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0f0f0f;
+      --surface:    #161616;
+      --drawer-bg:  #111111;
+      --text:       #f0ede8;
+      --text-muted: #6b6b6b;
+      --accent:     #f5a623;
+      --border:     #222222;
+      --nav-h:      64px;
+      --drawer-w:   320px;
+      --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Top Nav Bar ───────────────────────────────────────────────── */
+    .nav-bar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    /* ─── Hamburger Button ──────────────────────────────────────────── */
+    .hamburger {
+      position: relative;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .hamburger:hover { background: rgba(255,255,255,0.05); }
+    .hamburger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* SVG bars */
+    .hamburger svg {
+      width: 22px;
+      height: 22px;
+      overflow: visible;
+    }
+
+    .bar {
+      stroke: var(--text);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition:
+        transform 0.4s var(--ease-out),
+        opacity   0.3s ease;
+    }
+
+    /* Morph to × when open */
+    .hamburger.is-open .bar-top {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger.is-open .bar-mid {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger.is-open .bar-bot {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* ─── Overlay ───────────────────────────────────────────────────── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 110;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-out);
+    }
+
+    .overlay.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ─── Drawer ────────────────────────────────────────────────────── */
+    .drawer {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 120;
+      width: var(--drawer-w);
+      max-width: 90vw;
+      background: var(--drawer-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.45s var(--ease-out);
+      will-change: transform;
+    }
+
+    .drawer.is-open {
+      transform: translateX(0);
+    }
+
+    /* ─── Drawer Header ─────────────────────────────────────────────── */
+    .drawer-header {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .drawer-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── Nav Items ─────────────────────────────────────────────────── */
+    .nav-list {
+      list-style: none;
+      padding: 16px 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      opacity: 0;
+      transform: translateX(-16px);
+      transition:
+        opacity  0.35s ease,
+        transform 0.35s var(--ease-out);
+    }
+
+    /* Stagger each item in when drawer opens */
+    .drawer.is-open .nav-item:nth-child(1) { transition-delay: 0.06s; opacity: 1; transform: none; }
+    .drawer.is-open .nav-item:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: none; }
+    .drawer.is-open .nav-item:nth-child(3) { transition-delay: 0.14s; opacity: 1; transform: none; }
+    .drawer.is-open .nav-item:nth-child(4) { transition-delay: 0.18s; opacity: 1; transform: none; }
+    .drawer.is-open .nav-item:nth-child(5) { transition-delay: 0.22s; opacity: 1; transform: none; }
+    .drawer.is-open .nav-item:nth-child(6) { transition-delay: 0.26s; opacity: 1; transform: none; }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 24px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      position: relative;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    /* Accent line on hover */
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      width: 3px;
+      height: 60%;
+      background: var(--accent);
+      border-radius: 0 2px 2px 0;
+      transition: transform 0.25s var(--ease-out), opacity 0.25s;
+      opacity: 0;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+      background: rgba(245, 166, 35, 0.05);
+    }
+
+    .nav-link:hover::before {
+      transform: translateY(-50%) scaleY(1);
+      opacity: 1;
+    }
+
+    .nav-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+      border-radius: 4px;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link.active::before {
+      transform: translateY(-50%) scaleY(1);
+      opacity: 1;
+    }
+
+    /* Icon wrapper */
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      opacity: 0.6;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .nav-link:hover .nav-icon,
+    .nav-link.active .nav-icon {
+      opacity: 1;
+    }
+
+    /* ─── Divider ───────────────────────────────────────────────────── */
+    .nav-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 24px;
+    }
+
+    /* ─── Drawer Footer ─────────────────────────────────────────────── */
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5a623 0%, #e8832a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #0f0f0f;
+      flex-shrink: 0;
+    }
+
+    .user-info { min-width: 0; }
+
+    .user-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ─── Page Content ──────────────────────────────────────────────── */
+    .page-content {
+      padding-top: calc(var(--nav-h) + 48px);
+      padding-left: 48px;
+      padding-right: 48px;
+      max-width: 640px;
+    }
+
+    .page-content h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .page-content p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Reduced Motion ────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .drawer, .overlay, .bar, .nav-item, .nav-link, .nav-link::before {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav Bar -->
+  <nav class="nav-bar">
+    <a href="#" class="nav-logo">studio<span>.</span></a>
+
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="drawer"
+    >
+      <svg viewBox="0 0 22 22" aria-hidden="true">
+        <line class="bar bar-top" x1="3" y1="5"  x2="19" y2="5" />
+        <line class="bar bar-mid" x1="3" y1="11" x2="19" y2="11" />
+        <line class="bar bar-bot" x1="3" y1="17" x2="19" y2="17" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- Slide-out Drawer -->
+  <nav class="drawer" id="drawer" aria-label="Site navigation" aria-hidden="true">
+
+    <div class="drawer-header">
+      <span class="drawer-label">Navigation</span>
+    </div>
+
+    <ul class="nav-list" role="list">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <!-- Home icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 9.5L10 3l7 6.5V17a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+            <path d="M7 18v-6h6v6"/>
+          </svg>
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- Work icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="7" width="16" height="11" rx="2"/>
+            <path d="M7 7V5a2 2 0 014 0v2"/>
+          </svg>
+          Work
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- Services icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10" cy="10" r="3"/>
+            <path d="M10 1v3M10 16v3M1 10h3M16 10h3M3.22 3.22l2.12 2.12M14.66 14.66l2.12 2.12M16.78 3.22l-2.12 2.12M5.34 14.66l-2.12 2.12"/>
+          </svg>
+          Services
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- About icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10" cy="7" r="3"/>
+            <path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7"/>
+          </svg>
+          About
+        </a>
+      </li>
+
+      <li class="nav-item"><div class="nav-divider"></div></li>
+
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- Blog icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h12M4 8h8M4 12h6M4 16h4"/>
+          </svg>
+          Journal
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <!-- Contact icon -->
+          <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="16" height="12" rx="2"/>
+            <path d="M2 7l8 5 8-5"/>
+          </svg>
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <div class="drawer-footer">
+      <div class="user-row">
+        <div class="avatar" aria-hidden="true">AJ</div>
+        <div class="user-info">
+          <div class="user-name">Alex Jordan</div>
+          <div class="user-role">Design Lead</div>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- Page Content -->
+  <main class="page-content">
+    <h1>Hamburger Nav Menu</h1>
+    <p>A slide-out navigation drawer with a morphing hamburger icon, staggered item entrance, and an amber accent line on hover. Click the menu button in the top-right to open.</p>
+    <div class="hint">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 9v5M10 6.5v.5"/></svg>
+      Press <kbd style="font-family:monospace;background:#1f1f1f;padding:2px 6px;border-radius:4px;font-size:0.75rem;">Esc</kbd> to close the menu
+    </div>
+  </main>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const drawer    = document.getElementById('drawer');
+    const overlay   = document.getElementById('overlay');
+
+    function openMenu() {
+      hamburger.classList.add('is-open');
+      drawer.classList.add('is-open');
+      overlay.classList.add('is-visible');
+      hamburger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      // Trap focus to drawer
+      drawer.querySelector('.nav-link').focus();
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('is-open');
+      drawer.classList.remove('is-open');
+      overlay.classList.remove('is-visible');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      hamburger.focus();
+    }
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeMenu();
+    });
+
+    // Focus trap inside drawer
+    drawer.addEventListener('keydown', e => {
+      if (e.key !== 'Tab') return;
+      const focusable = [...drawer.querySelectorAll('a, button')];
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+  </script>
+</body>
+</html>

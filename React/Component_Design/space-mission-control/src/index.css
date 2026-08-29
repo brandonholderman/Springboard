@@ -1,4 +1,26 @@
 body {
     background-color: black;
     color: white;
+    font-family: "Kelly Slab", sans-serif;
+}
+
+/* .nav-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.title-container {
+    display: flex;
+    justify-content: flex-end;
+} */
+
+.heading-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    margin-top: 0.3rem;
+    font-family: "Racing Sans One", sans-serif;
+    padding-right: 2rem;
 }

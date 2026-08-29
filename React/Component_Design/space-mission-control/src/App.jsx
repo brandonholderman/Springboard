@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MissionControl from "./MissionControl";
+import NavMenu from "./NavMenu";
 
 
 function App () {
@@ -19,7 +20,10 @@ function App () {
 	return (
 		<>
 			<header>
-				<h1>Space Mission Control</h1>
+				<div className="heading-container">
+					<NavMenu />
+					<h1 className="title">Space Mission Control</h1>
+				</div>
 			</header>
 			<MissionControl missions={INITIAL_MISSIONS} />
 		</>

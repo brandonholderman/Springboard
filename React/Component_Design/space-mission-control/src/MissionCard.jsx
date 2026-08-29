@@ -7,7 +7,7 @@ function MissionCard({ id, name, status, crew, updateStatus }) {
         <div className='mission-card'>
             <div className='mission-info'>
                 <h3>{name}</h3>
-                <p>Status: {status}</p>
+                    <p>Status: {status}</p>
                 <div className='crew-list'>
                     Crew: {crew.join(', ')}
                 </div>

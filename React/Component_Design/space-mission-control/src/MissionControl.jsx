@@ -17,12 +17,12 @@ function MissionControl({ missions }) {
             <MissionFilter status={status_options}>
                 {missionList.map(mission => (
                     <MissionCard 
-                    key={mission.id} 
-                    id={mission.id} 
-                    name={mission.name} 
-                    status={mission.status} 
-                    crew={mission.crew} 
-                    updateStatus={updateMissionStatus}
+                        key={mission.id} 
+                        id={mission.id} 
+                        name={mission.name} 
+                        status={mission.status} 
+                        crew={mission.crew} 
+                        updateStatus={updateMissionStatus}
                     />
                 ))}
             </MissionFilter>
