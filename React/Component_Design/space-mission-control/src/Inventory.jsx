@@ -6,14 +6,19 @@ function Inventory() {
 
     const [inventoryItem, setInventoryItem] = useState([])
 
-    function addInventoryItem() {
-        
+    function addInventoryItem(id, itemName, quantity, purpose) {
+        return setInventoryItem({
+            id: id,
+            name: itemName,
+            quantity: quantity,
+            purpose: purpose,
+        });
     }
 
     return (
         <div>
             <h2>Spacecraft Inventory Manager</h2>
-            <h3>Add an Itemy to the Inventory</h3>
+            <h3>Add an Item to the Inventory</h3>
             <div className='form-container'>
                 <form className='inventory-form'>
                 {/* <label for="item-name">Item Name:</label> */}
@@ -25,7 +30,7 @@ function Inventory() {
                             <input name="item-requirement" type='checkbox' required/>
                     </div>
                     <div className='add-button'>
-                        <button className='action-button' onClick={() => addInventoryItem(id, name, quantity, purpose)}>Add</button>
+                        <button className='action-button' type='submit' onClick={() => addInventoryItem(id, itemName, quantity, purpose)}>Add</button>
                     </div>
                 </form>
             </div>
