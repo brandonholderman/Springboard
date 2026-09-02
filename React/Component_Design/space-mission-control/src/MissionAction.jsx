@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './MissionAction.css'
 
 function MissionAction({ id, updateStatus }) {

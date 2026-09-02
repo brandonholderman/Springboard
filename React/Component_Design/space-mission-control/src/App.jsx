@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MissionControl from "./MissionControl";
+import Inventory from "./Inventory.jsx";
 import NavMenu from "./NavMenu";
-
 
 function App () {
 	const INITIAL_MISSIONS = [
@@ -25,7 +25,12 @@ function App () {
 					<h1 className="title">Space Mission Control</h1>
 				</div>
 			</header>
-			<MissionControl missions={INITIAL_MISSIONS} />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<MissionControl missions={INITIAL_MISSIONS} />} />
+					<Route path="inventory" element={<Inventory />} />
+				</Routes>
+			</BrowserRouter>
 		</>
 	);
 }
