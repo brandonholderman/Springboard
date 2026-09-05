@@ -1,10 +1,11 @@
 import './InventoryCard.css'
 
-function InventoryCard({ id, name, quantity, purpose }) {
+function InventoryCard({ id, name, quantity, purpose, setInventoryItem, setHeaderVis }) {
 
-    // function deleteItem(itemId) {
-    //     itemId === id ? 
-    // }
+    function deleteItem(id) {
+        setInventoryItem(itemList => itemList.filter(item => item.id !== id)) 
+        setHeaderVis(false)
+    }
 
     return (
         <div className='inventory-card'>
