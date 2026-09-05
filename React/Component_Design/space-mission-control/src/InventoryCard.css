@@ -5,7 +5,9 @@
 
 .inventory-card {
     display: flex;
+    justify-content: space-between;
     border: 0.1rem solid white;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     padding-left: 1rem;
 }
@@ -15,7 +17,7 @@
     color: white;
     width: 7.5rem;
     height: 3rem;
-    border: 0.15rem solid green;
+    border: 0.15rem solid red;
     margin: 0.3rem;
     margin-bottom: 0.6rem;
     padding: 6px 16px;
@@ -23,6 +25,10 @@
 
 .delete-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 14px rgba(45, 168, 65, 0.55);
+    box-shadow: 0 6px 14px rgba(255, 94, 0, 0.55);
 }
 
+.delete-container {
+    margin-top: 2rem;
+    margin-right: 1rem;
+}

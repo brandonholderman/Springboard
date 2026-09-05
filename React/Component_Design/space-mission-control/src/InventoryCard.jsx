@@ -13,7 +13,7 @@ function InventoryCard({ id, name, quantity, purpose }) {
                 <p>Quantity: {quantity}</p>
                 <p>Purpose: {purpose}</p>
             </div>
-            <div className='action-container'>
+            <div className='delete-container'>
                 <button className='delete-button' onClick={() => deleteItem(id)}>Delete</button>
             </div>
         </div>
